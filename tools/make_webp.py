@@ -212,15 +212,19 @@ def process(kind: str, job: str) -> bool:
         save(im, out, quality=88)
     else:
         im = trim(sharpen(matte(im, kind)))
+        # The 16 px transparent margin on each side is part of the target size,
+        # so the finished file is exactly 1600 tall / 2400 wide / 800 long side.
+        PAD = 16
         if kind == "can":
-            im = fit(im, height=1600)
+            im = fit(im, height=1600 - 2 * PAD)
         elif kind == "splash":
-            im = fit(im, width=2400)
+            im = fit(im, width=2400 - 2 * PAD)
         else:
             # fruit: 800 px on the long side, whatever the aspect of the piece
-            im = fit(im, height=800) if im.height >= im.width else fit(im, width=800)
-        pad = Image.new("RGBA", (im.width + 32, im.height + 32), (0, 0, 0, 0))
-        pad.alpha_composite(im, (16, 16))
+            lim = 800 - 2 * PAD
+            im = fit(im, height=lim) if im.height >= im.width else fit(im, width=lim)
+        pad = Image.new("RGBA", (im.width + 2 * PAD, im.height + 2 * PAD), (0, 0, 0, 0))
+        pad.alpha_composite(im, (PAD, PAD))
         im = pad
         save(im, out, quality=90)
 

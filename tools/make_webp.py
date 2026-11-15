@@ -97,6 +97,20 @@ def matte(im: Image.Image, kind: str = "can") -> Image.Image:
 
     # Kill the pale contact shadow / mirror strip that collects under a
     # product sitting on a studio floor.
+    if kind == "fruit":
+        # Pale floor reflection clings under a piece and would read as a grey
+        # smear on a dark page. Per column, cut everything below the last pixel
+        # that is clearly the fruit itself (saturated flesh or a dark shadowed
+        # edge); pith and highlights sit above that line and stay.
+        mx = rgb.max(axis=2)
+        mn = rgb.min(axis=2)
+        sat = (mx - mn) / np.maximum(mx, 1.0)
+        solid = (sat > 0.20) | (mx < 140)
+        for x in range(fg.shape[1]):
+            col = np.where(solid[:, x] & fg[:, x])[0]
+            if len(col):
+                fg[col.max() + 2:, x] = False
+
     if kind == "can":
         # Per column, cut everything below the last "definitely metal/label"
         # pixel: that is the bottom rim of the can, and the soft grey-to-white

@@ -45,9 +45,10 @@ nav .r{display:flex;gap:10px;align-items:center}.bag{position:relative;width:44p
 .sec{padding:130px 5vw 80px}.pill{display:inline-block;background:#ffd6dc;color:#c01f38;font:800 12px Nunito;letter-spacing:.1em;padding:6px 14px;border-radius:99px;margin-bottom:14px}
 .sec h2{font-size:clamp(42px,7vw,96px)}.sec h2 em{font-style:normal;color:var(--coral)}.sec>p{max-width:520px;margin:16px 0 24px;opacity:.75}
 .ch{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:34px}.ch button{border:2px solid #06283a30;border-radius:99px;padding:9px 20px;font-weight:800;background:#fff}.ch button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
-.car{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:24px 4px 30px;margin:0 -5vw;padding-left:5vw;padding-right:5vw;scrollbar-width:none}.car::-webkit-scrollbar{display:none}
-.cd{flex:0 0 min(256px,68vw);scroll-snap-align:start;text-align:center}.cd .pn{border-radius:34px;height:320px;position:relative;display:grid;place-items:center;transform:rotate(-3deg);transition:transform .3s,box-shadow .3s;box-shadow:0 12px 26px #06283a12}.cd .pn::before{content:'';position:absolute;left:50%;top:47%;width:74%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 36% 30%,#ffffffcc,#ffffff40 58%,#ffffff00 74%)}.cd .pn::after{content:'';position:absolute;left:50%;bottom:15px;width:52%;height:13px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(ellipse at center,#06283a30,#06283a00 72%)}.cd:nth-child(even) .pn{transform:rotate(3deg)}.cd:hover .pn{transform:rotate(0) scale(1.02);box-shadow:0 18px 34px #06283a1f}
-.cd .pn svg{height:86%;width:auto;position:relative;z-index:1;filter:drop-shadow(0 12px 10px #0003)}
+/* flavour shelf: no panel, no crop — each can stands in front of its colour disc */
+.car{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,44px);max-width:1060px;margin:0 auto;padding:36px 0 10px}
+.cd{text-align:center;min-width:0}.cd .pn{position:relative;display:flex;align-items:flex-end;justify-content:center;height:clamp(190px,23vw,286px);margin-bottom:14px}.cd .disc{position:absolute;left:50%;bottom:5%;width:min(80%,250px);aspect-ratio:1;transform:translateX(-50%);border-radius:50%}.cd .pn::after{content:'';position:absolute;left:50%;bottom:-4px;width:44%;height:13px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(ellipse at center,#06283a2e,#06283a00 72%)}.cd .bd{top:0;right:6%;width:66px;height:66px;font-size:12px}.cd h3{font-size:clamp(20px,2vw,27px);margin:16px 0 4px;transition:transform .25s}.tag2{display:none}.cd:hover h3{transform:translateY(-2px)}
+.cd .pn svg{position:relative;z-index:2;height:100%;width:auto;filter:drop-shadow(0 12px 10px #0003)}
 .bd{position:absolute;top:-14px;right:-10px;width:78px;height:78px;background:var(--sun);color:var(--ink);font:400 13px/1.1 'Titan One';display:grid;place-items:center;text-align:center;clip-path:polygon(50% 0,61% 12%,75% 7%,79% 22%,93% 25%,88% 40%,100% 50%,88% 60%,93% 75%,79% 78%,75% 93%,61% 88%,50% 100%,39% 88%,25% 93%,21% 78%,7% 75%,12% 60%,0 50%,12% 40%,7% 25%,21% 22%,25% 7%,39% 12%);z-index:3;animation:sw 6s linear infinite}@keyframes sw{to{transform:rotate(360deg)}}
 .cd h3{font-size:26px;margin:20px 0 6px}.pr{display:flex;justify-content:center;align-items:center;gap:12px;font-weight:800;font-size:20px}.ad{width:38px;height:38px;border-radius:50%;color:#fff;font-size:24px;line-height:1;transition:transform .2s}.ad:hover{transform:scale(1.2) rotate(90deg)}
 .how{background:var(--cream);color:var(--ink);padding:60px 5vw 160px;position:relative;overflow:hidden}.how h2{font-size:clamp(38px,6vw,80px);text-align:center;margin-bottom:12px}.how h2 em{font-style:normal;color:#5b3cff}
@@ -84,7 +85,7 @@ footer h3.t{font-size:30px;margin-bottom:16px}.jn{display:flex;background:#fff;b
 /* generated photo assets */
 img.can{height:100%;width:auto;display:block}
 #hc img.can{height:100%;filter:drop-shadow(0 30px 24px #0007)}
-.cd .pn img.can{height:86%;width:auto;position:relative;z-index:1;filter:drop-shadow(0 12px 10px #0003)}
+.cd .pn img.can{position:relative;z-index:2;height:100%;width:auto;filter:drop-shadow(0 12px 10px #0002);transition:transform .35s ease}.cd:hover .pn img.can{transform:translateY(-7px)}
 #exc img.can{height:100%;filter:drop-shadow(0 30px 24px #0008)}
 .pv img.can{position:absolute;height:92%;z-index:2;filter:drop-shadow(0 18px 14px #0005)}
 .li .th img.can{height:100%;width:auto}
@@ -106,6 +107,19 @@ img.can{height:100%;width:auto;display:block}
 }
 .skip{position:absolute;left:-9999px;top:10px;z-index:120;background:var(--lime);color:var(--ink);font-weight:800;padding:10px 20px;border-radius:99px;text-decoration:none}
 .skip:focus{left:12px}
+@media(max-width:900px){.car{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}.cd .pn{height:clamp(190px,31vw,258px)}}
+@media(max-width:560px){
+ .car{grid-template-columns:1fr;gap:0;padding:20px 0 0}
+ .cd{display:grid;grid-template-columns:78px minmax(0,1fr) auto;align-items:center;gap:12px;text-align:left;padding:13px 2px;border-bottom:1px solid #06283a14}
+ .cd .pn{height:88px;margin:0}
+ .cd .disc{width:70px;bottom:1%}
+ .cd .pn::after{display:none}
+ .cd .bd{width:44px;height:44px;font-size:7px;top:-5px;left:-5px;right:auto}
+ .cd h3{margin:0;font-size:19px;line-height:1.15}.cd .bd{display:none}.tag2{display:block;width:max-content;font:800 10px/1 Nunito,sans-serif;letter-spacing:.07em;text-transform:uppercase;background:var(--sun);color:var(--ink);border-radius:99px;padding:4px 8px;margin:6px 0 0}
+ .cd .pr{justify-content:flex-end;gap:10px;font-size:18px}
+ .cd .ad{width:34px;height:34px;font-size:21px}
+}
+@media(max-width:380px){.cd h3{font-size:17px}.cd{grid-template-columns:68px minmax(0,1fr) auto}}
 </style></head><body>
 <div id="ld"></div>
 <a class="skip" href="#main">Skip to content</a><nav><a class="logo" href="#"><i id="lg"></i>fizzly</a><div class="lk" id="navlk"><a href="#flav">Flavours</a><a href="#how">How we fizz</a><a href="#deal">Deals</a><a href="#foot">Find a shop</a></div><div class="r"><button class="mnu" aria-label="Menu" aria-expanded="false" aria-controls="navlk">☰</button><button class="bag" aria-label="Cart" aria-haspopup="dialog"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M5 8h14l-1 12H6zM9 8a3 3 0 016 0"/></svg><span id="cn" aria-live="polite" aria-atomic="true">0</span></button><a class="btn y" style="padding:11px 22px;font-size:15px" href="#flav">Order now</a></div></nav>
@@ -204,7 +218,7 @@ $('#mq').innerHTML='Get your fizz on ★ Real juice ★ Ice cold ★ Zero boring
 // cards, filter, cart
 let n=0;const cats=['All','Fruity','Citrus','Berry'];
 $('#ch').innerHTML=cats.map((c,i)=>`<button class="${i?'':'on'}">${c}</button>`).join('');
-$('#car').innerHTML=F.map((f,i)=>`<article class="cd" data-c="${f.cat}"><div class="pn" style="background:${f.bg}">${f.b?`<span class="bd">${f.b.toUpperCase()}</span>`:''}${can(f.c,'c'+i,f.n,1)}</div><h3 style="color:${f.c[1]}">${f.n}</h3><div class="pr">R${f.p}<button class="ad" style="background:${f.c[1]}" aria-label="Add ${f.n}">+</button></div></article>`).join('');
+$('#car').innerHTML=F.map((f,i)=>`<article class="cd" data-c="${f.cat}"><div class="pn"><i class="disc" style="background:${f.bg}"></i>${f.b?`<span class="bd">${f.b.toUpperCase()}</span>`:''}${can(f.c,'c'+i,f.n,1)}</div><h3 style="color:${f.c[1]}">${f.n}${f.b?`<span class="tag2">${f.b}</span>`:''}</h3><div class="pr">R${f.p}<button class="ad" style="background:${f.c[1]}" aria-label="Add ${f.n}">+</button></div></article>`).join('');
 $$('#ch button').forEach(b=>b.onclick=()=>{$$('#ch button').forEach(x=>x.classList.toggle('on',x===b));$$('.cd').forEach(c=>{const s=b.textContent==='All'||c.dataset.c===b.textContent;c.style.display=s?'':'none';if(s)gsap.from(c,{y:40,opacity:0,scale:.9,duration:.5,ease:'back.out(1.8)'})})});
 const C={},FS=150;const R=v=>'R'+v;
 function draw(){const k=Object.keys(C).filter(i=>C[i]>0),cnt=k.reduce((s,i)=>s+C[i],0),sb=k.reduce((s,i)=>s+C[i]*F[i].p,0);$('#cn').textContent=cnt;
@@ -229,7 +243,7 @@ function tick(){const d=new Date(),e=new Date(d);e.setHours(23,59,59,0);let s=Ma
 // scroll reveals
 gsap.from('#d1 svg,#d2 svg',{scaleY:0,transformOrigin:'top',duration:1,ease:'elastic.out(1,.6)',scrollTrigger:{trigger:'#flav',start:'top 80%'}});
 gsap.from('.sec h2,.sec .pill,.sec>p,.ch',{y:50,opacity:0,stagger:.1,duration:.7,scrollTrigger:{trigger:'#flav',start:'top 60%'}});
-gsap.from('.cd',{y:90,rotate:6,opacity:0,stagger:.1,duration:.8,ease:'back.out(1.5)',scrollTrigger:{trigger:'#car',start:'top 85%'}});
+gsap.from('.cd',{y:60,opacity:0,stagger:.08,duration:.7,ease:'back.out(1.4)',scrollTrigger:{trigger:'#car',start:'top 85%'}});
 gsap.from('.how h2',{scale:.6,opacity:0,duration:.8,ease:'back.out(2)',scrollTrigger:{trigger:'#how',start:'top 70%'}});
 gsap.from('.st',{x:(i)=>i%2?120:-120,opacity:0,stagger:.15,duration:.8,ease:'back.out(1.4)',scrollTrigger:{trigger:'#sts',start:'top 85%'}});
 gsap.from('.promo h2,.tm,.promo .tg',{y:60,opacity:0,stagger:.1,scrollTrigger:{trigger:'#deal',start:'top 70%'}});

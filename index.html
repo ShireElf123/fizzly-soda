@@ -128,21 +128,15 @@ cherry:'<path d="M-14 8Q-4-40 18-44M16 12Q10-30 18-44" stroke="#3a8a2a" stroke-w
 grape:[[-18,-14],[6,-16],[-6,6],[-26,8],[18,6],[-14,28],[8,28]].map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="15" fill="#6a2fd0"/><circle cx="${p[0]-5}" cy="${p[1]-5}" r="4" fill="#fff" opacity=".4"/>`).join('')+'<path d="M-6-36Q-6-20-6-14" stroke="#3a8a2a" stroke-width="4"/>',
 berry:'<circle r="32" fill="#2f6fe0"/><circle cy="-6" r="9" fill="#1b3f96"/><path d="M-6-6L0-14 6-6 0 0Z" fill="#6aa0ff"/><circle cx="-12" cy="-14" r="6" fill="#fff" opacity=".4"/>'};
 return `<svg viewBox="-50 -50 100 100">${m[t]}</svg>`}
-/* Generated photo assets. Keys match F[i].f (Blue Razz uses the key "berry").
-   Every entry has a drawn-SVG fallback, so a missing file never breaks the page. */
+/* Generated photo assets, synced from assets/ by tools/sync_assets.py.
+   Keys match F[i].f (Blue Razz uses the key "berry"). Empty slots fall
+   back to the drawn SVG, so a missing file never breaks the page. */
 const A='assets/';
 const ASSETS={
  can:{cherry:A+'can-cherry.webp',lime:A+'can-lime.webp',orange:A+'can-orange.webp',grape:A+'can-grape.webp',lemon:A+'can-lemon.webp',berry:A+'can-blue-razz.webp'},
- fruit:{
-  cherry:[1,2,3,4].map(n=>A+'fruit-cherry-'+n+'.webp'),
-  lime:[1,2,3,4].map(n=>A+'fruit-lime-'+n+'.webp'),
-  orange:[1,2,3,4].map(n=>A+'fruit-orange-'+n+'.webp'),
-  grape:[1,2,3,4].map(n=>A+'fruit-grape-'+n+'.webp'),
-  lemon:[1,2,3,4].map(n=>A+'fruit-lemon-'+n+'.webp'),
-  berry:[1,2,3,4].map(n=>A+'fruit-blue-razz-'+n+'.webp')
- },
+ fruit:{cherry:[A+'fruit-cherry-1.webp',A+'fruit-cherry-2.webp',A+'fruit-cherry-3.webp',A+'fruit-cherry-4.webp'],lime:[A+'fruit-lime-1.webp',A+'fruit-lime-2.webp',A+'fruit-lime-3.webp',A+'fruit-lime-4.webp'],orange:[A+'fruit-orange-1.webp',A+'fruit-orange-2.webp'],grape:[],lemon:[],berry:[]},
  splash:{cherry:A+'splash-cherry.webp',lime:A+'splash-lime.webp',orange:A+'splash-orange.webp',grape:A+'splash-grape.webp',lemon:A+'splash-lemon.webp',berry:A+'splash-blue-razz.webp'},
- backdrop:{cherry:A+'backdrop-cherry.webp',lime:A+'backdrop-lime.webp',orange:A+'backdrop-orange.webp',grape:A+'backdrop-grape.webp',lemon:A+'backdrop-lemon.webp',berry:A+'backdrop-blue-razz.webp'}
+ backdrop:{}
 };
 function can(c,u,t){const f=F.find(x=>x.n===t),k=f&&f.f;return k&&ASSETS.can[k]?`<img class="can" src="${ASSETS.can[k]}" alt="${t}" data-k="${k}" onerror="canFail(this)">`:canV(c,u,t)}
 function canFail(el){const k=el.dataset.k,i=F.findIndex(x=>x.f===k);el.outerHTML=canV(F[i].c,"f"+k.replace(/[^a-z]/g,""),F[i].n)}

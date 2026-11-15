@@ -46,9 +46,29 @@ def matte(im: Image.Image, kind: str = "can") -> Image.Image:
     BG_TH = 0.045
 
     rgb = np.asarray(im.convert("RGB")).astype(np.float32)
-    dist = np.sqrt(((255.0 - rgb) ** 2).sum(axis=2)) / 441.673  # 0 = pure white
+    # Measure the actual backdrop instead of assuming pure 255 white: renders
+    # come back with a faint grey/cream cast that would otherwise survive the key.
+    edge = np.concatenate([
+        rgb[:3].reshape(-1, 3), rgb[-3:].reshape(-1, 3),
+        rgb[:, :3].reshape(-1, 3), rgb[:, -3:].reshape(-1, 3),
+    ])
+    bgc = np.median(edge, axis=0)
+    dist = np.sqrt(((bgc - rgb) ** 2).sum(axis=2)) / 441.673  # 0 = backdrop colour
 
-    lbl, _ = ndimage.label(dist < BG_TH)
+    if kind == "fruit":
+        # Produce shots are lit on a white sweep, so the backdrop reads as
+        # "neutral and bright" rather than one exact colour. Coloured flesh,
+        # rind and juice stay saturated; enclosed pale areas (pith, highlights,
+        # the gap between two cherries) are kept because they are not reachable
+        # from the frame edge.
+        mx = rgb.max(axis=2)
+        mn = rgb.min(axis=2)
+        sat = (mx - mn) / np.maximum(mx, 1.0)
+        bgcand = ((sat < 0.12) & (mx > 183)) | (dist < 0.04)
+    else:
+        bgcand = dist < BG_TH
+
+    lbl, _ = ndimage.label(bgcand)
     border = np.concatenate([lbl[0], lbl[-1], lbl[:, 0], lbl[:, -1]])
     bg = np.isin(lbl, np.unique(border[border > 0]))
     fg = ~bg
@@ -98,6 +118,19 @@ def matte(im: Image.Image, kind: str = "can") -> Image.Image:
                 fg[y] = False
             else:
                 break
+
+    if kind == "fruit":
+        # A gap the painter closed off (e.g. the wedge between two cherry stems)
+        # is trapped backdrop: still subject according to the flood fill, but it
+        # must go. Genuine pale flesh such as citrus pith sits a few steps off
+        # the backdrop colour and survives this tighter test.
+        pockets, pn = ndimage.label(fg & (dist < 0.022))
+        for i, sl in enumerate(ndimage.find_objects(pockets), start=1):
+            if sl is None:
+                continue
+            comp = pockets[sl] == i
+            if comp.sum() > 500:
+                fg[sl][comp] = False
 
     alpha = ndimage.minimum_filter(fg.astype(np.float32), size=3)   # 1 px erosion
     alpha = ndimage.gaussian_filter(alpha, 0.6)                     # feather
@@ -170,7 +203,8 @@ def process(kind: str, job: str) -> bool:
         elif kind == "splash":
             im = fit(im, width=2400)
         else:
-            im = fit(im, height=800)
+            # fruit: 800 px on the long side, whatever the aspect of the piece
+            im = fit(im, height=800) if im.height >= im.width else fit(im, width=800)
         pad = Image.new("RGBA", (im.width + 32, im.height + 32), (0, 0, 0, 0))
         pad.alpha_composite(im, (16, 16))
         im = pad

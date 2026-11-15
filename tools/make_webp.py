@@ -31,49 +31,47 @@ OUT = ROOT / "assets"
 FLAVOURS = ["cherry", "lime", "orange", "grape", "lemon", "blue-razz"]
 
 
-def matte(im: Image.Image) -> Image.Image:
+def matte(im: Image.Image, kind: str = "can") -> Image.Image:
     """Key out the near-white seamless backdrop of a studio product shot.
 
-    Only pixels that are *almost pure white* seed the background, flood filled
-    from the frame edge. Enclosed white areas on the subject — the knockout
-    logo, the fizz wave, droplets — are not connected to the edge through white
-    pixels, so they survive. Those survivors, and the silhouette itself, are
-    then feathered by a 1 px erosion plus a soft blur for clean anti-aliasing.
+    Background = pixels within `BG_TH` of white that are reachable from the
+    frame edge, so enclosed white label art (the logo, the fizz wave) and the
+    highlights inside the silhouette survive. Soft grey studio shadow is close
+    enough to white to get absorbed at this tolerance, and specular highlights
+    on a glossy can stay well outside it (a looser key would bite a stripe out
+    of the middle of the can). Leftover pale blobs are then dropped by keeping
+    only the subject component(s), and the edge is eroded + feathered so it
+    anti-aliases cleanly on any background.
     """
+    BG_TH = 0.045
+
     rgb = np.asarray(im.convert("RGB")).astype(np.float32)
     dist = np.sqrt(((255.0 - rgb) ** 2).sum(axis=2)) / 441.673  # 0 = pure white
 
-    seed = dist < 0.030
-    lbl, n = ndimage.label(seed)
+    lbl, _ = ndimage.label(dist < BG_TH)
     border = np.concatenate([lbl[0], lbl[-1], lbl[:, 0], lbl[:, -1]])
     bg = np.isin(lbl, np.unique(border[border > 0]))
-
     fg = ~bg
 
-    # Floating near-white specks (stray bubbles in the backdrop) are not really
-    # part of the subject: drop small, very pale components that never touch the
-    # silhouette's main blob.
     fl, fn = ndimage.label(fg)
     if fn:
-        keep = []
-        for i, sl in enumerate(ndimage.find_objects(fl), start=1):
-            if sl is None:
-                continue
-            comp = fl[sl] == i
-            area = comp.sum()
-            if area < 400:
-                pale = dist[sl][comp].mean() < 0.08
-                if pale:
-                    continue
-            keep.append(i)
+        sizes = ndimage.sum(fg, fl, range(1, fn + 1))
+        if kind in ("can", "backdrop"):
+            # A can is one solid object: keep the biggest blob (plus anything
+            # substantial that it touches, e.g. a splash on the rim).
+            keep = [1 + int(np.argmax(sizes))]
+        else:
+            # Fruit and splashes legitimately fly apart into loose droplets.
+            keep = [i + 1 for i, sz in enumerate(sizes) if sz > 220]
         fg = np.isin(fl, keep)
+        fg = ndimage.binary_fill_holes(fg)
 
     alpha = ndimage.minimum_filter(fg.astype(np.float32), size=3)   # 1 px erosion
     alpha = ndimage.gaussian_filter(alpha, 0.6)                     # feather
     alpha = np.clip((alpha - 0.15) / 0.7, 0, 1)
 
-    # Colour decontamination: pull edge pixels' colour from the nearest fully
-    # opaque pixel so no white studio fringe is left behind.
+    # Colour decontamination: edge pixels take their colour from the nearest
+    # fully opaque pixel, so no white studio fringe is left behind.
     edge = (alpha > 0.02) & (alpha < 0.98)
     if edge.any():
         _, (iy, ix) = ndimage.distance_transform_edt(alpha < 0.98, return_indices=True)
@@ -81,7 +79,7 @@ def matte(im: Image.Image) -> Image.Image:
         w = alpha[..., None]
         rgb = np.where(edge[..., None], near * w + rgb * (1 - w), rgb)
 
-    out = np.dstack([rgb, (alpha * 255)]).clip(0, 255).astype(np.uint8)
+    out = np.dstack([rgb, alpha * 255]).clip(0, 255).astype(np.uint8)
     return Image.fromarray(out, "RGBA")
 
 
@@ -133,7 +131,7 @@ def process(kind: str, job: str) -> bool:
         im = sharpen(im.resize((1920, 1080), Image.LANCZOS), 55)
         save(im, out, quality=88)
     else:
-        im = trim(sharpen(matte(im)))
+        im = trim(sharpen(matte(im, kind)))
         if kind == "can":
             im = fit(im, height=1600)
         elif kind == "splash":

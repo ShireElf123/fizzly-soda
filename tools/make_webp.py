@@ -56,15 +56,48 @@ def matte(im: Image.Image, kind: str = "can") -> Image.Image:
     fl, fn = ndimage.label(fg)
     if fn:
         sizes = ndimage.sum(fg, fl, range(1, fn + 1))
-        if kind in ("can", "backdrop"):
-            # A can is one solid object: keep the biggest blob (plus anything
-            # substantial that it touches, e.g. a splash on the rim).
-            keep = [1 + int(np.argmax(sizes))]
-        else:
-            # Fruit and splashes legitimately fly apart into loose droplets.
-            keep = [i + 1 for i, sz in enumerate(sizes) if sz > 220]
+        biggest = float(sizes.max())
+        keep = []
+        for i, sl in enumerate(ndimage.find_objects(fl), start=1):
+            if sl is None:
+                continue
+            area = float(sizes[i - 1])
+            comp = fl[sl] == i
+            pale = float(dist[sl][comp].mean())          # near-white sliver?
+            if kind in ("can", "backdrop"):
+                # A can is one solid object: keep the biggest blob only.
+                if area == biggest:
+                    keep.append(i)
+            elif area > 220 and not (pale < 0.12 and area < 0.02 * biggest):
+                # Fruit and splashes legitimately fly apart into droplets, but
+                # pale little slivers are studio shadow/reflection leftovers.
+                keep.append(i)
         fg = np.isin(fl, keep)
         fg = ndimage.binary_fill_holes(fg)
+
+    # Kill the pale contact shadow / mirror strip that collects under a
+    # product sitting on a studio floor.
+    if kind == "can":
+        # Per column, cut everything below the last "definitely metal/label"
+        # pixel: that is the bottom rim of the can, and the soft grey-to-white
+        # contact shadow underneath it goes away cleanly.
+        band = int(fg.shape[0] * 0.86)
+        strong = dist > 0.20
+        for x in range(fg.shape[1]):
+            col = np.where(strong[:, x] & fg[:, x])[0]
+            if len(col):
+                fg[col.max() + 2:, x] = False
+            else:
+                fg[band:, x] = False
+    else:
+        for y in range(fg.shape[0] - 1, -1, -1):
+            row = fg[y]
+            if not row.any():
+                continue
+            if row.mean() < 0.12 and dist[y][row].mean() < 0.10:
+                fg[y] = False
+            else:
+                break
 
     alpha = ndimage.minimum_filter(fg.astype(np.float32), size=3)   # 1 px erosion
     alpha = ndimage.gaussian_filter(alpha, 0.6)                     # feather

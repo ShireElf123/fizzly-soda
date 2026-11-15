@@ -46,8 +46,8 @@ nav .r{display:flex;gap:10px;align-items:center}.bag{position:relative;width:44p
 .sec h2{font-size:clamp(42px,7vw,96px)}.sec h2 em{font-style:normal;color:var(--coral)}.sec>p{max-width:520px;margin:16px 0 24px;opacity:.75}
 .ch{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:34px}.ch button{border:2px solid #06283a30;border-radius:99px;padding:9px 20px;font-weight:800;background:#fff}.ch button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
 .car{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:24px 4px 30px;margin:0 -5vw;padding-left:5vw;padding-right:5vw;scrollbar-width:none}.car::-webkit-scrollbar{display:none}
-.cd{flex:0 0 min(260px,70vw);scroll-snap-align:start;text-align:center}.cd .pn{border-radius:34px;height:340px;position:relative;display:grid;place-items:end center;transform:rotate(-3deg);transition:transform .3s}.cd:nth-child(even) .pn{transform:rotate(3deg)}.cd:hover .pn{transform:rotate(0) scale(1.03)}
-.cd .pn svg{height:112%;margin-bottom:6px;filter:drop-shadow(0 16px 12px #0004)}
+.cd{flex:0 0 min(256px,68vw);scroll-snap-align:start;text-align:center}.cd .pn{border-radius:34px;height:320px;position:relative;display:grid;place-items:center;transform:rotate(-3deg);transition:transform .3s,box-shadow .3s;box-shadow:0 12px 26px #06283a12}.cd .pn::before{content:'';position:absolute;left:50%;top:47%;width:74%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 36% 30%,#ffffffcc,#ffffff40 58%,#ffffff00 74%)}.cd .pn::after{content:'';position:absolute;left:50%;bottom:15px;width:52%;height:13px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(ellipse at center,#06283a30,#06283a00 72%)}.cd:nth-child(even) .pn{transform:rotate(3deg)}.cd:hover .pn{transform:rotate(0) scale(1.02);box-shadow:0 18px 34px #06283a1f}
+.cd .pn svg{height:86%;width:auto;position:relative;z-index:1;filter:drop-shadow(0 12px 10px #0003)}
 .bd{position:absolute;top:-14px;right:-10px;width:78px;height:78px;background:var(--sun);color:var(--ink);font:400 13px/1.1 'Titan One';display:grid;place-items:center;text-align:center;clip-path:polygon(50% 0,61% 12%,75% 7%,79% 22%,93% 25%,88% 40%,100% 50%,88% 60%,93% 75%,79% 78%,75% 93%,61% 88%,50% 100%,39% 88%,25% 93%,21% 78%,7% 75%,12% 60%,0 50%,12% 40%,7% 25%,21% 22%,25% 7%,39% 12%);z-index:3;animation:sw 6s linear infinite}@keyframes sw{to{transform:rotate(360deg)}}
 .cd h3{font-size:26px;margin:20px 0 6px}.pr{display:flex;justify-content:center;align-items:center;gap:12px;font-weight:800;font-size:20px}.ad{width:38px;height:38px;border-radius:50%;color:#fff;font-size:24px;line-height:1;transition:transform .2s}.ad:hover{transform:scale(1.2) rotate(90deg)}
 .how{background:var(--cream);color:var(--ink);padding:60px 5vw 160px;position:relative;overflow:hidden}.how h2{font-size:clamp(38px,6vw,80px);text-align:center;margin-bottom:12px}.how h2 em{font-style:normal;color:#5b3cff}
@@ -84,12 +84,12 @@ footer h3.t{font-size:30px;margin-bottom:16px}.jn{display:flex;background:#fff;b
 /* generated photo assets */
 img.can{height:100%;width:auto;display:block}
 #hc img.can{height:100%;filter:drop-shadow(0 30px 24px #0007)}
-.cd .pn img.can{height:112%;margin-bottom:6px;filter:drop-shadow(0 16px 12px #0004)}
+.cd .pn img.can{height:86%;width:auto;position:relative;z-index:1;filter:drop-shadow(0 12px 10px #0003)}
 #exc img.can{height:100%;filter:drop-shadow(0 30px 24px #0008)}
 .pv img.can{position:absolute;height:92%;z-index:2;filter:drop-shadow(0 18px 14px #0005)}
 .li .th img.can{height:100%;width:auto}
 .fr img.fruit{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 12px 10px #0004)}
-.st .ic img.fruit{width:60px;height:60px}
+.st .ic img.fruit{width:60px;height:60px;object-fit:contain}
 .logo i img{width:24px;height:24px;object-fit:contain}
 .hs{position:absolute;left:50%;top:-17%;width:126%;transform:translateX(-50%);z-index:1;pointer-events:none;opacity:0;mask-image:linear-gradient(180deg,#000 52%,#0000 88%);-webkit-mask-image:linear-gradient(180deg,#000 52%,#0000 88%)}
 .hs img{width:100%;height:auto;filter:drop-shadow(0 10px 18px #0003)}

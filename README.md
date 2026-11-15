@@ -43,9 +43,11 @@ All client-side, no backend, and honest about it:
 
 - **Cart** persists in `localStorage` under `fizzly.cart`, survives reloads, has per-line
   quantity steppers, a remove button, an empty state, and adds an **Undo** action to the toast.
-- **Checkout** is a two-step flow inside the drawer: summary with free-delivery progress,
-  then an order-confirmation panel with a generated reference (`FZ-XXXXXX`). No payment is
-  taken — a real build would hand off to Paystack or Yoco at that point.
+- **Six-pack builder** allows any combination of six cans at the displayed per-can prices.
+  It adds the chosen individual cans to the cart; there is no bundle discount.
+- **Checkout** includes an itemised summary and validated delivery form, followed by a demo
+  completion screen. No details are transmitted, no order is placed, and no payment is taken.
+  A real store needs a backend, inventory management, and a payment provider.
 - **Footer signup** validates the address, stores it under `fizzly.mail`, and switches to a
   "Joined" state. Nothing is emailed; the copy says so.
 - The drawer traps Tab focus, moves focus to the close button on open and restores it on close.

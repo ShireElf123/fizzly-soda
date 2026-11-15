@@ -124,6 +124,13 @@ img.can{height:100%;width:auto;display:block}@keyframes fad{from{opacity:0}to{op
  .cd .ad{width:34px;height:34px;font-size:21px}
 }
 @media(max-width:380px){.cd h3{font-size:17px}.cd{grid-template-columns:68px minmax(0,1fr) auto}}
+
+/* Mix-and-match shopping */
+.builder{max-width:1060px;margin:55px auto 0;padding:clamp(22px,4vw,42px);border-radius:28px;background:#e5f8ba;text-align:left;color:var(--ink)}
+.builder h3{font:400 clamp(25px,4vw,38px)/1.1 'Titan One',sans-serif;margin:0 0 8px}.builder p{margin:0 0 18px;font-size:15px}.build-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.build-item{background:#fff;border-radius:14px;padding:12px;display:flex;align-items:center;gap:10px;min-width:0}.build-name{flex:1;min-width:0;font-weight:800;font-size:14px}.build-name small{display:block;opacity:.65;font-weight:600}.build-qty{display:flex;align-items:center;gap:7px}.build-qty button{width:30px;height:30px;border-radius:50%;background:#e9f4d4;font-size:20px}.build-qty button:disabled{opacity:.35;cursor:not-allowed}.build-qty output{min-width:14px;text-align:center;font-weight:800}.build-bottom{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:18px;flex-wrap:wrap}.build-bottom .btn:disabled{opacity:.45;cursor:not-allowed}.build-status{font-weight:800}.checkout-form{display:grid;gap:12px}.checkout-form h4{font:400 26px 'Titan One',sans-serif;margin:0}.checkout-form p{font-size:14px;margin:0}.checkout-form label{font-weight:800;font-size:13px;display:grid;gap:5px}.checkout-form input,.checkout-form textarea{width:100%;padding:12px;border:1px solid #aab8ba;border-radius:10px;font:inherit;background:white;color:#06283a}.checkout-form textarea{resize:vertical;min-height:70px}.checkout-actions{display:flex;gap:10px;flex-wrap:wrap}.checkout-actions button:not(.btn){background:transparent;text-decoration:underline;font-weight:800}.checkout-summary{background:#f1f5ec;border-radius:12px;padding:14px}.checkout-summary div{display:flex;justify-content:space-between;gap:10px;margin:5px 0}.checkout-notice{background:#fff1bd;border-radius:10px;padding:12px}.checkout-form .btn{justify-content:center}
+@media(max-width:650px){.build-list{grid-template-columns:repeat(2,minmax(0,1fr))}.builder{margin-top:35px}.build-item{padding:10px;gap:5px}.build-name{font-size:12px}.build-qty{gap:4px}.build-qty button{width:28px;height:28px}.build-bottom .btn{width:100%;justify-content:center}}
+@media(max-width:350px){.build-list{grid-template-columns:1fr}}
+
 </style></head><body>
 <div id="prg" aria-hidden="true"></div>
 <div id="ld"></div>
@@ -139,13 +146,14 @@ img.can{height:100%;width:auto;display:block}@keyframes fad{from{opacity:0}to{op
 <div class="mq"><div id="mq"></div></div>
 
 <section class="cream sec" id="flav"><div class="dr" id="d1"></div><span class="pill">OUR SIGNATURE SODAS</span><h2>Pick your <em>flavour</em></h2><p>Small-batch sodas made with real juice. Six flavours, one very hard decision.</p>
-<div class="ch" id="ch"></div><div class="car" id="car"></div></section>
+<div class="ch" id="ch"></div><div class="car" id="car"></div>
+<div class="builder" id="builder"><h3>Build your own six-pack</h3><p>Mix your favourites. Choose six cans and add them to your cart at individual can prices.</p><div class="build-list" id="build-list"></div><div class="build-bottom"><div class="build-status" id="build-status" role="status" aria-live="polite"></div><button class="btn" id="build-add" type="button" disabled>Add six to cart</button></div></div></section>
 
 <section class="ex" id="ex"><div class="exbg" id="exbg"></div><div class="excol"><span class="tag" id="ext"></span><h2 class="nm t" id="exn"></h2><div class="exd" id="exd"></div></div><div class="excol" id="exc"></div><div class="exp" id="exp"></div></section>
 <section class="how" id="how"><h2>From fruit to can <em>in 40 seconds</em></h2><div class="sts" id="sts"></div>
 <svg class="wv" viewBox="0 0 1200 110" preserveAspectRatio="none"><path d="M0 60Q150 10 300 55T600 50T900 55T1200 40V110H0Z" fill="#ffc8d0"/><path d="M0 85Q200 40 400 80T800 75T1200 70V110H0Z" fill="#0a4a58"/></svg></section>
 
-<section class="promo" id="deal"><div><span class="tg"><i></i>HAPPY HOUR IS LIVE</span><h2>Two packs, <em>20% off.</em></h2><div class="tm" id="tm"></div><a class="btn y" href="#flav">Grab the deal</a></div><div class="pv" id="pv"><i class="sc"></i><div class="spl" id="pspl"></div><div class="o">20%<br>OFF</div></div></section>
+<section class="promo" id="deal"><div><span class="tg"><i></i>MAKE IT YOURS</span><h2>Six cans, <em>your mix.</em></h2><p>Pick your favourites and build a six-pack.</p><div class="tm" id="tm" hidden></div><a class="btn y" href="#builder">Build a pack</a></div><div class="pv" id="pv"><i class="sc"></i><div class="spl" id="pspl"></div><div class="o">YOUR<br>MIX</div></div></section>
 
 </main>
 <footer id="foot"><div class="dr" id="d2" style="top:-2px"></div><h3 class="t">Get a free can on your birthday</h3><div class="jn"><input id="em" type="email" inputmode="email" autocomplete="email" placeholder="you@email.com" aria-label="Email address"><button class="btn" id="jb">Join</button></div><p class="jm" id="jmsg" role="status" aria-live="polite"></p>
@@ -254,9 +262,10 @@ function undoAdd(){if(lastAdd===null)return;const i=lastAdd;C[i]=Math.max(0,(C[i
 function add(i){C[i]=(C[i]||0)+1;draw();lastAdd=i;gsap.fromTo('#cn',{scale:2},{scale:1,duration:.5,ease:'elastic.out(1,.5)'});toast(F[i].n+' added',true)}
 function checkout(){
  const t=totals();if(!t.cnt)return;
- const ref='FZ-'+Date.now().toString(36).toUpperCase().slice(-6);
- $('#ci').innerHTML=`<div class="done"><span class="dtick">✓</span><h4>Order placed</h4><p>Ref <b>${ref}</b> · ${t.cnt} can${t.cnt>1?'s':''} · ${R(t.tot)}</p><p class="muted">Demo store — no payment was taken. A live build hands off to Paystack or Yoco here.</p><button class="btn" onclick="resetCart()">Back to the fizz</button></div>`;
- $('#cf').innerHTML='';$('#ci').scrollTop=0;
+ $('#cf').innerHTML='';
+ $('#ci').innerHTML=`<form class="checkout-form" id="checkout-form"><h4>Delivery details</h4><p class="checkout-notice">Demo checkout only. No order will be sent and no payment will be taken.</p><div class="checkout-summary">${t.k.map(i=>`<div><span>${F[i].n} × ${C[i]}</span><b>${R(F[i].p*C[i])}</b></div>`).join('')}<div><span>Delivery</span><b>${t.del?R(t.del):'Free'}</b></div><div><strong>Total</strong><strong>${R(t.tot)}</strong></div></div><label>Full name<input name="name" autocomplete="name" required maxlength="100"></label><label>Email<input name="email" type="email" autocomplete="email" required maxlength="254"></label><label>Delivery address<textarea name="address" autocomplete="street-address" required maxlength="300"></textarea></label><div class="checkout-actions"><button type="button" onclick="draw()">← Back to cart</button><button class="btn" type="submit">Review demo checkout</button></div></form>`;
+ $('#ci').scrollTop=0;
+ $('#checkout-form').addEventListener('submit',e=>{e.preventDefault();if(!e.currentTarget.reportValidity())return;$('#ci').innerHTML=`<div class="done"><span class="dtick">✓</span><h4>Demo complete</h4><p>${t.cnt} can${t.cnt===1?'':'s'} · ${R(t.tot)}</p><p class="muted">This is only a preview. No order was placed, details sent, or payment taken. Your cart is still saved.</p><button class="btn" onclick="draw()">Back to cart</button></div>`;$('#ci').scrollTop=0});
 }
 function gotoFlav(){const el=document.getElementById('flav');if(el&&el.scrollIntoView)el.scrollIntoView({behavior:'smooth'})}
 function quickView(i){try{if(typeof exSet==='function')exSet(i)}catch(e){}const el=document.getElementById('ex');if(el&&el.scrollIntoView)el.scrollIntoView({behavior:'smooth',block:'start'});else gotoFlav()}
@@ -279,6 +288,14 @@ if(mnu&&nlk){const shut=()=>{nlk.classList.remove('open');mnu.setAttribute('aria
  mnu.onclick=()=>{const open=nlk.classList.toggle('open');mnu.setAttribute('aria-expanded',open);mnu.textContent=open?'✕':'☰'};
  nlk.querySelectorAll('a').forEach(a=>a.addEventListener('click',shut));}
 $$('.ad').forEach((b,i)=>b.onclick=()=>add(i));loadCart();draw();
+// Mix and match: no discounts or inventory claims until connected to a backend.
+const mix=F.map(()=>0);
+function drawMix(){const count=mix.reduce((a,b)=>a+b,0),price=mix.reduce((a,b,i)=>a+b*F[i].p,0);
+ $('#build-list').innerHTML=F.map((f,i)=>`<div class="build-item"><div class="build-name">${f.n}<small>${R(f.p)} / can</small></div><div class="build-qty"><button type="button" onclick="changeMix(${i},-1)" aria-label="Remove one ${f.n} from six-pack" ${mix[i]===0?'disabled':''}>−</button><output aria-label="${f.n} quantity">${mix[i]}</output><button type="button" onclick="changeMix(${i},1)" aria-label="Add one ${f.n} to six-pack" ${count===6?'disabled':''}>+</button></div></div>`).join('');
+ $('#build-status').textContent=count+' of 6 selected · '+R(price);$('#build-add').disabled=count!==6;
+}
+function changeMix(i,d){const count=mix.reduce((a,b)=>a+b,0);if(d>0&&count>=6||d<0&&mix[i]===0)return;mix[i]+=d;drawMix();const buttons=$$('#build-list .build-item')[i].querySelectorAll('button');(buttons[d>0&&count+1<6?1:0]||buttons[0]).focus()}
+$('#build-add').onclick=()=>{if(mix.reduce((a,b)=>a+b,0)!==6)return;mix.forEach((v,i)=>{if(v)C[i]=(C[i]||0)+v;mix[i]=0});draw();drawMix();toast('Six-pack added to cart',false);openCart()};drawMix();
 // how + promo
 const S=[['Picked ripe','Sun-ripened fruit from 11 partner farms arrives every morning.','lime','#ffd6dc'],['Squeezed fresh','Real juice cold-pressed in minutes, never from concentrate.','orange','#fff0b3'],['Fizzed &amp; canned','Sparkling water, a little sugar and a lot of bubbles. Straight into the can.','berry','#d9d0ff']];
 $('#sts').innerHTML=S.map((s,i)=>`<div class="st"><div class="ic" style="background:${s[3]}"><span class="nm">${i+1}</span>${fr(s[2])}</div><div><h3>${s[0]}</h3><p>${s[1]}</p></div></div>`).join('');

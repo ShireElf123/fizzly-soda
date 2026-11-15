@@ -136,7 +136,7 @@ const ASSETS={
  can:{cherry:A+'can-cherry.webp',lime:A+'can-lime.webp',orange:A+'can-orange.webp',grape:A+'can-grape.webp',lemon:A+'can-lemon.webp',berry:A+'can-blue-razz.webp'},
  fruit:{cherry:[A+'fruit-cherry-1.webp',A+'fruit-cherry-2.webp',A+'fruit-cherry-3.webp',A+'fruit-cherry-4.webp'],lime:[A+'fruit-lime-1.webp',A+'fruit-lime-2.webp',A+'fruit-lime-3.webp',A+'fruit-lime-4.webp'],orange:[A+'fruit-orange-1.webp',A+'fruit-orange-2.webp',A+'fruit-orange-3.webp',A+'fruit-orange-4.webp'],grape:[A+'fruit-grape-1.webp',A+'fruit-grape-2.webp',A+'fruit-grape-3.webp',A+'fruit-grape-4.webp'],lemon:[A+'fruit-lemon-1.webp',A+'fruit-lemon-2.webp',A+'fruit-lemon-3.webp',A+'fruit-lemon-4.webp'],berry:[A+'fruit-blue-razz-1.webp',A+'fruit-blue-razz-2.webp',A+'fruit-blue-razz-3.webp',A+'fruit-blue-razz-4.webp']},
  splash:{cherry:A+'splash-cherry.webp',lime:A+'splash-lime.webp',orange:A+'splash-orange.webp',grape:A+'splash-grape.webp',lemon:A+'splash-lemon.webp',berry:A+'splash-blue-razz.webp'},
- backdrop:{cherry:A+'backdrop-cherry.webp',lime:A+'backdrop-lime.webp',orange:A+'backdrop-orange.webp',grape:A+'backdrop-grape.webp',lemon:A+'backdrop-lemon.webp'}
+ backdrop:{cherry:A+'backdrop-cherry.webp',lime:A+'backdrop-lime.webp',orange:A+'backdrop-orange.webp',grape:A+'backdrop-grape.webp',lemon:A+'backdrop-lemon.webp',berry:A+'backdrop-blue-razz.webp'}
 };
 function can(c,u,t){const f=F.find(x=>x.n===t),k=f&&f.f;return k&&ASSETS.can[k]?`<img class="can" src="${ASSETS.can[k]}" alt="${t}" data-k="${k}" onerror="canFail(this)">`:canV(c,u,t)}
 function canFail(el){const k=el.dataset.k,i=F.findIndex(x=>x.f===k);el.outerHTML=canV(F[i].c,"f"+k.replace(/[^a-z]/g,""),F[i].n)}

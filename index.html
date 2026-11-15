@@ -4,6 +4,10 @@
 <meta property="og:title" content="Fizzly: get your fizz on">
 <meta property="og:description" content="Six ice-cold fruit sodas. Real juice. Zero boring.">
 <meta property="og:image" content="assets/backdrop-cherry.webp">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23c8ff2e'/%3E%3Ctext x='32' y='47' font-family='Verdana,sans-serif' font-size='40' font-weight='bold' text-anchor='middle' fill='%2306283a'%3Ef%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","name":"Fizzly","url":"/","logo":"assets/icon-512.png"},{"@type":"ItemList","name":"Fizzly sodas","itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"Product","name":"Cherry Pop","brand":"Fizzly","offers":{"@type":"Offer","price":"28","priceCurrency":"ZAR","availability":"https://schema.org/InStock"}}},{"@type":"ListItem","position":2,"item":{"@type":"Product","name":"Lime Zing","brand":"Fizzly","offers":{"@type":"Offer","price":"28","priceCurrency":"ZAR","availability":"https://schema.org/InStock"}}},{"@type":"ListItem","position":3,"item":{"@type":"Product","name":"Orange Blast","brand":"Fizzly","offers":{"@type":"Offer","price":"28","priceCurrency":"ZAR","availability":"https://schema.org/InStock"}}},{"@type":"ListItem","position":4,"item":{"@type":"Product","name":"Grape Fizz","brand":"Fizzly","offers":{"@type":"Offer","price":"30","priceCurrency":"ZAR","availability":"https://schema.org/InStock"}}},{"@type":"ListItem","position":5,"item":{"@type":"Product","name":"Lemon Spark","brand":"Fizzly","offers":{"@type":"Offer","price":"28","priceCurrency":"ZAR","availability":"https://schema.org/InStock"}}},{"@type":"ListItem","position":6,"item":{"@type":"Product","name":"Blue Razz","brand":"Fizzly","offers":{"@type":"Offer","price":"30","priceCurrency":"ZAR","availability":"https://schema.org/InStock"}}}]}]}</script>
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" as="image" href="assets/can-cherry.webp" fetchpriority="high">
@@ -47,7 +51,7 @@ nav .r{display:flex;gap:10px;align-items:center}.bag{position:relative;width:44p
 .ch{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:34px}.ch button{border:2px solid #06283a30;border-radius:99px;padding:9px 20px;font-weight:800;background:#fff}.ch button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
 /* flavour shelf: no panel, no crop — each can stands in front of its colour disc */
 .car{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,44px);max-width:1060px;margin:0 auto;padding:36px 0 10px}
-.cd{text-align:center;min-width:0}.cd .pn{position:relative;display:flex;align-items:flex-end;justify-content:center;height:clamp(190px,23vw,286px);margin-bottom:14px}.cd .disc{position:absolute;left:50%;bottom:5%;width:min(80%,250px);aspect-ratio:1;transform:translateX(-50%);border-radius:50%}.cd .pn::after{content:'';position:absolute;left:50%;bottom:-4px;width:44%;height:13px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(ellipse at center,#06283a2e,#06283a00 72%)}.cd .bd{top:0;right:6%;width:66px;height:66px;font-size:12px}.cd h3{font-size:clamp(20px,2vw,27px);margin:16px 0 4px;transition:transform .25s}.tag2{display:none}.cd:hover h3{transform:translateY(-2px)}
+.cd{text-align:center;min-width:0}.cd .pn{position:relative;display:flex;align-items:flex-end;justify-content:center;height:clamp(190px,23vw,286px);margin-bottom:14px;cursor:pointer;border-radius:18px}.cd .pn:focus-visible{outline:3px solid var(--ink);outline-offset:6px}.cd .disc{transition:transform .35s ease}.cd:hover .disc{transform:translateX(-50%) scale(1.04)}.cd .disc{position:absolute;left:50%;bottom:5%;width:min(80%,250px);aspect-ratio:1;transform:translateX(-50%);border-radius:50%}.cd .pn::after{content:'';position:absolute;left:50%;bottom:-4px;width:44%;height:13px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(ellipse at center,#06283a2e,#06283a00 72%)}.cd .bd{top:0;right:6%;width:66px;height:66px;font-size:12px}.cd h3{font-size:clamp(20px,2vw,27px);margin:16px 0 4px;transition:transform .25s}.tag2{display:none}.cd:hover h3{transform:translateY(-2px)}
 .cd .pn svg{position:relative;z-index:2;height:100%;width:auto;filter:drop-shadow(0 12px 10px #0003)}
 .bd{position:absolute;top:-14px;right:-10px;width:78px;height:78px;background:var(--sun);color:var(--ink);font:400 13px/1.1 'Titan One';display:grid;place-items:center;text-align:center;clip-path:polygon(50% 0,61% 12%,75% 7%,79% 22%,93% 25%,88% 40%,100% 50%,88% 60%,93% 75%,79% 78%,75% 93%,61% 88%,50% 100%,39% 88%,25% 93%,21% 78%,7% 75%,12% 60%,0 50%,12% 40%,7% 25%,21% 22%,25% 7%,39% 12%);z-index:3;animation:sw 6s linear infinite}@keyframes sw{to{transform:rotate(360deg)}}
 .cd h3{font-size:26px;margin:20px 0 6px}.pr{display:flex;justify-content:center;align-items:center;gap:12px;font-weight:800;font-size:20px}.ad{width:38px;height:38px;border-radius:50%;color:#fff;font-size:24px;line-height:1;transition:transform .2s}.ad:hover{transform:scale(1.2) rotate(90deg)}
@@ -64,10 +68,10 @@ nav .r{display:flex;gap:10px;align-items:center}.bag{position:relative;width:44p
 .pv{position:relative;height:380px;display:grid;place-items:center}.pv .sc{position:absolute;inset:6%;background:var(--coral);clip-path:polygon(50% 0,58% 8%,69% 3%,74% 13%,85% 11%,87% 22%,97% 27%,92% 38%,100% 48%,92% 58%,97% 69%,87% 74%,85% 85%,74% 84%,69% 94%,58% 90%,50% 100%,42% 90%,31% 94%,26% 84%,15% 85%,13% 74%,3% 69%,8% 58%,0 48%,8% 38%,3% 27%,13% 22%,15% 11%,26% 13%,31% 3%,42% 8%);animation:sw 30s linear infinite}
 .pv svg{position:absolute;height:92%}.pv .o{position:absolute;right:2%;bottom:4%;width:100px;height:100px;border-radius:50%;background:var(--sun);color:var(--ink);font:400 24px/1 'Titan One';display:grid;place-items:center;transform:rotate(12deg);z-index:3}
 footer{background:var(--deep);padding:140px 5vw 40px;position:relative;overflow:hidden}
-footer h3.t{font-size:30px;margin-bottom:16px}.jn{display:flex;background:#fff;border-radius:99px;padding:6px;max-width:520px}.jn input{flex:1;border:0;background:none;padding:0 20px;font:inherit;color:var(--ink);min-width:0}.jn .btn{padding:12px 26px;box-shadow:none}
+footer h3.t{font-size:30px;margin-bottom:16px}.jn{display:flex;background:#fff;border-radius:99px;padding:6px;max-width:520px}.jn input{flex:1;border:0;background:none;padding:0 20px;font:inherit;color:var(--ink);min-width:0}.jn .btn{padding:12px 26px;box-shadow:none}.jm{font:700 14px Nunito;margin:10px 2px 0;min-height:20px;opacity:.85;color:#ffffffcc}.jm.ok{color:var(--lime);opacity:1}.jn input.shake{animation:shk .4s}@keyframes shk{0%,100%{transform:none}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}.jn input:disabled{opacity:.55}.jn .btn:disabled{filter:saturate(.35);cursor:default}
 .fl{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0 40px;margin:36px 0;max-width:900px}details{border-top:1px solid #ffffff2a;padding:16px 0}summary{font:400 22px 'Titan One';color:var(--sun);cursor:pointer}details a{display:block;color:#fff;opacity:.8;margin-top:10px;text-decoration:none}
 .wm{font:400 clamp(80px,26vw,380px)/.9 'Titan One';color:transparent;-webkit-text-stroke:3px var(--lime);text-align:center;letter-spacing:-.02em}footer small{display:block;text-align:center;opacity:.5;margin-top:24px}
-#ts{position:fixed;left:50%;bottom:24px;transform:translate(-50%,120px);background:var(--lime);color:var(--ink);font-weight:800;padding:12px 24px;border-radius:99px;z-index:90}
+#ts{position:fixed;left:50%;bottom:24px;transform:translate(-50%,120px);background:var(--lime);color:var(--ink);font-weight:800;padding:12px 24px;border-radius:99px;z-index:96;display:flex;align-items:center;gap:14px}#tsu{font:800 14px Nunito;background:#06283a1a;border-radius:99px;padding:7px 14px;color:var(--ink)}#tsu:hover{background:#06283a2e}#prg{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--coral),var(--sun),var(--lime));z-index:130;pointer-events:none;border-radius:0 3px 3px 0}
 @media(max-width:820px){nav .lk{display:none}.promo{grid-template-columns:1fr}.hl{position:relative;left:0;bottom:0;margin-top:30px;max-width:none}.hr{position:relative;right:0;bottom:0;justify-items:start;margin-top:20px}.hero{padding-bottom:50px}}
 @media(prefers-reduced-motion:reduce){.bl,.sp,.bd,.mq div,.pv .sc{animation:none}}
 .mq{transition:background .6s}.ex{height:100svh;background:#5a0a1c;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:90px 6vw 40px;position:relative;overflow:hidden;gap:20px}
@@ -77,13 +81,13 @@ footer h3.t{font-size:30px;margin-bottom:16px}.jn{display:flex;background:#fff;b
 .exp{position:absolute;left:6vw;bottom:34px;display:flex;gap:8px;z-index:2}.exp .dot{position:relative;width:38px;height:24px;padding:0;border:0;background:none;cursor:pointer;transition:width .4s}.exp .dot::after{content:'';position:absolute;left:0;right:0;top:9px;height:6px;border-radius:9px;background:#fff4;transition:background .4s}.exp .dot:hover::after{background:#fff8}.exp .dot.on{width:70px}.exp .dot.on::after{background:#fff}.exp .dot:focus-visible{outline:2px solid #fff;outline-offset:4px}
 #ov{position:fixed;inset:0;background:#000a;z-index:90;opacity:0;pointer-events:none;transition:.3s}#ov.on{opacity:1;pointer-events:auto}
 #cart{position:fixed;top:0;right:0;bottom:0;width:min(430px,100vw);background:var(--cream);color:var(--ink);z-index:95;transform:translateX(105%);transition:transform .5s cubic-bezier(.7,0,.2,1);display:flex;flex-direction:column;padding:22px;border-radius:30px 0 0 30px}#cart.on{transform:none}
-.chd{display:flex;justify-content:space-between;align-items:center}.chd h3{font-size:32px}.chd button{width:42px;height:42px;border-radius:50%;background:#06283a14}#ci{flex:1;overflow:auto;margin:14px 0}
+.chd{display:flex;justify-content:space-between;align-items:center}.chd h3{font-size:32px}.chd button{width:42px;height:42px;border-radius:50%;background:#06283a14}#ci{flex:1;overflow:auto;margin:14px 0}.liend{display:flex;flex-direction:column;align-items:flex-end;gap:10px}.li .rm{width:26px;height:26px;border-radius:50%;background:#06283a0f;font-size:12px;color:#06283a99;display:grid;place-items:center;transition:background .2s,color .2s}.li .rm:hover{background:#ff4f5e22;color:#c0272f}.q b{font-size:15px;min-width:14px;text-align:center}.empty{display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;padding:56px 10px}.empty .eic{font-size:46px}.empty p{font:700 16px Nunito;opacity:.6;margin:0}.done{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:40px 6px}.done .dtick{width:64px;height:64px;border-radius:50%;background:var(--lime);color:var(--ink);font-size:30px;display:grid;place-items:center;box-shadow:0 6px 0 #9bd119}.done h4{font-family:'Titan One',sans-serif;font-weight:400;font-size:26px;margin:6px 0 0}.done p{margin:0;font-size:15px;line-height:1.5}.done .muted{opacity:.6;font-size:13px;max-width:30ch}.done .btn{margin-top:12px}
 .li{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid #06283a18}.li .th{width:50px;height:74px;flex:none}.li .th svg,.li .th img{height:100%;width:auto}.li div.i{flex:1;font-size:15px;font-weight:800}
 .q{display:inline-flex;align-items:center;gap:12px;background:#fff;border-radius:99px;padding:4px 8px;margin-top:6px}.q button{width:28px;height:28px;border-radius:50%;background:#06283a12;font-size:18px}
 .bar{height:9px;background:#06283a18;border-radius:9px;overflow:hidden;margin:6px 0 14px}.bar i{display:block;height:100%;background:var(--coral);transition:width .5s}.tot{display:flex;justify-content:space-between;padding:3px 0}.tot.b{font:400 26px 'Titan One'}
 @media(max-width:820px){.ex{grid-template-columns:1fr;grid-template-rows:auto 1fr;padding-top:84px}#exc{height:44vh}}
 /* generated photo assets */
-img.can{height:100%;width:auto;display:block}
+img.can{height:100%;width:auto;display:block}@keyframes fad{from{opacity:0}to{opacity:1}}img.can,img.fruit{animation:fad .55s ease both}@media(prefers-reduced-motion:reduce){img.can,img.fruit{animation:none}}
 #hc img.can{height:100%;filter:drop-shadow(0 30px 24px #0007)}
 .cd .pn img.can{position:relative;z-index:2;height:100%;width:auto;filter:drop-shadow(0 12px 10px #0002);transition:transform .35s ease}.cd:hover .pn img.can{transform:translateY(-7px)}
 #exc img.can{height:100%;filter:drop-shadow(0 30px 24px #0008)}
@@ -121,6 +125,7 @@ img.can{height:100%;width:auto;display:block}
 }
 @media(max-width:380px){.cd h3{font-size:17px}.cd{grid-template-columns:68px minmax(0,1fr) auto}}
 </style></head><body>
+<div id="prg" aria-hidden="true"></div>
 <div id="ld"></div>
 <a class="skip" href="#main">Skip to content</a><nav><a class="logo" href="#"><i id="lg"></i>fizzly</a><div class="lk" id="navlk"><a href="#flav">Flavours</a><a href="#how">How we fizz</a><a href="#deal">Deals</a><a href="#foot">Find a shop</a></div><div class="r"><button class="mnu" aria-label="Menu" aria-expanded="false" aria-controls="navlk">☰</button><button class="bag" aria-label="Cart" aria-haspopup="dialog"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M5 8h14l-1 12H6zM9 8a3 3 0 016 0"/></svg><span id="cn" aria-live="polite" aria-atomic="true">0</span></button><a class="btn y" style="padding:11px 22px;font-size:15px" href="#flav">Order now</a></div></nav>
 
@@ -143,11 +148,11 @@ img.can{height:100%;width:auto;display:block}
 <section class="promo" id="deal"><div><span class="tg"><i></i>HAPPY HOUR IS LIVE</span><h2>Two packs, <em>20% off.</em></h2><div class="tm" id="tm"></div><a class="btn y" href="#flav">Grab the deal</a></div><div class="pv" id="pv"><i class="sc"></i><div class="spl" id="pspl"></div><div class="o">20%<br>OFF</div></div></section>
 
 </main>
-<footer id="foot"><div class="dr" id="d2" style="top:-2px"></div><h3 class="t">Get a free can on your birthday</h3><div class="jn"><input placeholder="you@email.com" aria-label="Email"><button class="btn">Join</button></div>
+<footer id="foot"><div class="dr" id="d2" style="top:-2px"></div><h3 class="t">Get a free can on your birthday</h3><div class="jn"><input id="em" type="email" inputmode="email" autocomplete="email" placeholder="you@email.com" aria-label="Email address"><button class="btn" id="jb">Join</button></div><p class="jm" id="jmsg" role="status" aria-live="polite"></p>
 <div class="fl"><details open><summary>Sodas</summary><a href="#flav">All flavours</a><a href="#deal">Pack deals</a><a href="#flav">Gift boxes</a></details><details><summary>Fizzly</summary><a href="#how">How we fizz</a><a href="#foot">Find a shop</a><a href="#foot">Careers</a></details><details><summary>Help</summary><a href="#foot">Delivery</a><a href="#foot">Contact</a><a href="#foot">FAQ</a></details></div>
 <div class="wm">fizzly</div><small>© 2026 Fizzly (placeholder brand). Prices and copy are placeholders.</small></footer>
 <div id="ov"></div><aside id="cart" role="dialog" aria-modal="true" aria-label="Your cart" aria-hidden="true" inert><div class="chd"><h3 class="t">Your cart</h3><button id="xc" aria-label="Close">✕</button></div><div id="ci"></div><div id="cf"></div></aside>
-<div id="ts" role="status" aria-live="polite">Added to cart</div>
+<div id="ts" role="status" aria-live="polite"><span id="tsm">Added to cart</span><button id="tsu" type="button">Undo</button></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -218,28 +223,84 @@ $('#mq').innerHTML='Get your fizz on ★ Real juice ★ Ice cold ★ Zero boring
 // cards, filter, cart
 let n=0;const cats=['All','Fruity','Citrus','Berry'];
 $('#ch').innerHTML=cats.map((c,i)=>`<button class="${i?'':'on'}">${c}</button>`).join('');
-$('#car').innerHTML=F.map((f,i)=>`<article class="cd" data-c="${f.cat}"><div class="pn"><i class="disc" style="background:${f.bg}"></i>${f.b?`<span class="bd">${f.b.toUpperCase()}</span>`:''}${can(f.c,'c'+i,f.n,1)}</div><h3 style="color:${f.c[1]}">${f.n}${f.b?`<span class="tag2">${f.b}</span>`:''}</h3><div class="pr">R${f.p}<button class="ad" style="background:${f.c[1]}" aria-label="Add ${f.n}">+</button></div></article>`).join('');
+$('#car').innerHTML=F.map((f,i)=>`<article class="cd" data-c="${f.cat}"><div class="pn" role="button" tabindex="0" aria-label="See ${f.n} details" onclick="quickView(${i})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();quickView(${i})}"><i class="disc" style="background:${f.bg}"></i>${f.b?`<span class="bd">${f.b.toUpperCase()}</span>`:''}${can(f.c,'c'+i,f.n,1)}</div><h3 style="color:${f.c[1]}">${f.n}${f.b?`<span class="tag2">${f.b}</span>`:''}</h3><div class="pr">R${f.p}<button class="ad" style="background:${f.c[1]}" aria-label="Add ${f.n}">+</button></div></article>`).join('');
 $$('#ch button').forEach(b=>b.onclick=()=>{$$('#ch button').forEach(x=>x.classList.toggle('on',x===b));$$('.cd').forEach(c=>{const s=b.textContent==='All'||c.dataset.c===b.textContent;c.style.display=s?'':'none';if(s)gsap.from(c,{y:40,opacity:0,scale:.9,duration:.5,ease:'back.out(1.8)'})})});
 const C={},FS=150;const R=v=>'R'+v;
-function draw(){const k=Object.keys(C).filter(i=>C[i]>0),cnt=k.reduce((s,i)=>s+C[i],0),sb=k.reduce((s,i)=>s+C[i]*F[i].p,0);$('#cn').textContent=cnt;
-$('#ci').innerHTML=k.length?k.map(i=>`<div class="li"><div class="th">${can(F[i].c,'k'+i,F[i].n,1)}</div><div class="i">${F[i].n}<br><span style="font-weight:700;opacity:.6">${R(F[i].p)}</span><div class="q"><button onclick="qc(${i},-1)">−</button>${C[i]}<button onclick="qc(${i},1)">+</button></div></div><b>${R(F[i].p*C[i])}</b></div>`).join(''):'<p style="opacity:.6;padding:30px 0">Your cart is empty. Time to fizz.</p>';
-$('#cf').innerHTML=`<small>${sb>=FS?'Free delivery unlocked 🎉':'Add '+R(FS-sb)+' for free delivery'}</small><div class="bar"><i style="width:${Math.min(100,sb/FS*100)}%"></i></div><div class="tot"><span>Subtotal</span><span>${R(sb)}</span></div><div class="tot"><span>Delivery</span><span>${sb>=FS||!cnt?'Free':R(25)}</span></div><div class="tot b"><span>Total</span><span>${R(sb+(sb>=FS||!cnt?0:25))}</span></div><button class="btn" style="width:100%;justify-content:center;margin-top:12px" onclick="alert('Checkout is a placeholder in this draft.')">Checkout</button>`}
+/* ── cart: persisted, undoable, with a real checkout step ───────────── */
+const CARTKEY='fizzly.cart';
+function totals(){const k=Object.keys(C).filter(i=>C[i]>0),cnt=k.reduce((s,i)=>s+C[i],0),sub=k.reduce((s,i)=>s+C[i]*F[i].p,0),del=(sub>=FS||!cnt)?0:25;return{k,cnt,sub,del,tot:sub+del}}
+function saveCart(){try{localStorage.setItem(CARTKEY,JSON.stringify(C))}catch(e){}}
+function loadCart(){try{const raw=JSON.parse(localStorage.getItem(CARTKEY)||'{}');Object.keys(raw).forEach(k=>{const v=parseInt(raw[k],10);if(F[k]&&v>0)C[k]=v})}catch(e){}}
+function draw(){
+ const t=totals(),k=t.k,cnt=t.cnt,sub=t.sub,del=t.del;
+ $('#cn').textContent=cnt;
+ document.title=(cnt?'('+cnt+') ':'')+'Fizzly: get your fizz on';
+ $('#ci').innerHTML=k.length?k.map(i=>`<div class="li"><div class="th">${can(F[i].c,'k'+i,F[i].n,1)}</div><div class="i">${F[i].n}<br><span style="font-weight:700;opacity:.6">${R(F[i].p)}</span><div class="q"><button onclick="qc(${i},-1)" aria-label="One less ${F[i].n}">−</button><b>${C[i]}</b><button onclick="qc(${i},1)" aria-label="One more ${F[i].n}">+</button></div></div><div class="liend"><b>${R(F[i].p*C[i])}</b><button class="rm" onclick="rm(${i})" aria-label="Remove ${F[i].n} from cart">✕</button></div></div>`).join('')
+  :`<div class="empty"><span class="eic">🫧</span><p>Nothing in here yet.</p><button class="btn" onclick="closeCart();gotoFlav()">Browse flavours</button></div>`;
+ $('#cf').innerHTML=`<small>${sub>=FS?'Free delivery unlocked 🎉':'Add '+R(FS-sub)+' for free delivery'}</small><div class="bar"><i style="width:${Math.min(100,sub/FS*100)}%"></i></div><div class="tot"><span>Subtotal</span><span>${R(sub)}</span></div><div class="tot"><span>Delivery</span><span>${del?R(del):'Free'}</span></div><div class="tot b"><span>Total</span><span>${R(t.tot)}</span></div>`
+  +(cnt?`<button class="btn" id="cob" style="width:100%;justify-content:center;margin-top:12px" onclick="checkout()">Checkout · ${R(t.tot)}</button>`:'');
+ saveCart();
+}
 const qc=(i,d)=>{C[i]=Math.max(0,(C[i]||0)+d);draw()};
-function add(i){C[i]=(C[i]||0)+1;draw();gsap.fromTo('#cn',{scale:2},{scale:1,duration:.5,ease:'elastic.out(1,.5)'});gsap.fromTo('#ts',{y:120},{y:-1,duration:.4,ease:'back.out(2)',onComplete:()=>gsap.to('#ts',{y:120,delay:1.1,duration:.3})})}
-const oc=()=>{$('#cart').classList.add('on');$('#ov').classList.add('on');$('#cart').setAttribute('aria-hidden','false');$('#cart').removeAttribute('inert')},cc=()=>{$('#cart').classList.remove('on');$('#ov').classList.remove('on');$('#cart').setAttribute('aria-hidden','true');$('#cart').setAttribute('inert','')};
-$('.bag').onclick=oc;$('#xc').onclick=cc;$('#ov').onclick=cc;addEventListener('keydown',e=>e.key==='Escape'&&cc());
+const rm=i=>{delete C[i];draw()};
+let lastAdd=null,toastTimer=null;
+function toast(msg,undo){
+ const el=$('#ts');$('#tsm').textContent=msg;$('#tsu').style.display=undo?'':'none';
+ clearTimeout(toastTimer);gsap.killTweensOf('#ts');
+ gsap.fromTo('#ts',{y:180},{y:0,duration:.45,ease:'back.out(2)'});
+ toastTimer=setTimeout(()=>gsap.to('#ts',{y:180,duration:.3}),undo?4500:2100);
+}
+function undoAdd(){if(lastAdd===null)return;const i=lastAdd;C[i]=Math.max(0,(C[i]||0)-1);lastAdd=null;draw();toast('Removed from cart',false)}
+function add(i){C[i]=(C[i]||0)+1;draw();lastAdd=i;gsap.fromTo('#cn',{scale:2},{scale:1,duration:.5,ease:'elastic.out(1,.5)'});toast(F[i].n+' added',true)}
+function checkout(){
+ const t=totals();if(!t.cnt)return;
+ const ref='FZ-'+Date.now().toString(36).toUpperCase().slice(-6);
+ $('#ci').innerHTML=`<div class="done"><span class="dtick">✓</span><h4>Order placed</h4><p>Ref <b>${ref}</b> · ${t.cnt} can${t.cnt>1?'s':''} · ${R(t.tot)}</p><p class="muted">Demo store — no payment was taken. A live build hands off to Paystack or Yoco here.</p><button class="btn" onclick="resetCart()">Back to the fizz</button></div>`;
+ $('#cf').innerHTML='';$('#ci').scrollTop=0;
+}
+function gotoFlav(){const el=document.getElementById('flav');if(el&&el.scrollIntoView)el.scrollIntoView({behavior:'smooth'})}
+function quickView(i){try{if(typeof exSet==='function')exSet(i)}catch(e){}const el=document.getElementById('ex');if(el&&el.scrollIntoView)el.scrollIntoView({behavior:'smooth',block:'start'});else gotoFlav()}
+function resetCart(){Object.keys(C).forEach(k=>delete C[k]);draw();closeCart()}
+let lastFocus=null;
+function openCart(){lastFocus=document.activeElement;$('#cart').classList.add('on');$('#ov').classList.add('on');$('#cart').setAttribute('aria-hidden','false');$('#cart').removeAttribute('inert');$('#ci').scrollTop=0;$('#xc').focus()}
+function closeCart(){const c=$('#cart');if(!c.classList.contains('on'))return;c.classList.remove('on');$('#ov').classList.remove('on');c.setAttribute('aria-hidden','true');c.setAttribute('inert','');if(lastFocus&&lastFocus.focus)lastFocus.focus()}
+$('.bag').onclick=openCart;$('#xc').onclick=closeCart;$('#ov').onclick=closeCart;$('#tsu').onclick=undoAdd;
+addEventListener('keydown',e=>{if(e.key==='Escape')closeCart()});
+addEventListener('keydown',e=>{
+ const c=$('#cart');if(e.key!=='Tab'||!c.classList.contains('on'))return;
+ const f=[...c.querySelectorAll('button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])')].filter(el=>el.offsetParent!==null);
+ const a=f[0]||c.querySelector('button'),z=f[f.length-1]||a;if(!a||!z)return;
+ if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}
+ else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}
+});
 // mobile nav (the desktop link row is hidden under 820px)
 const mnu=$('.mnu'),nlk=$('#navlk');
 if(mnu&&nlk){const shut=()=>{nlk.classList.remove('open');mnu.setAttribute('aria-expanded','false');mnu.textContent='☰'};
  mnu.onclick=()=>{const open=nlk.classList.toggle('open');mnu.setAttribute('aria-expanded',open);mnu.textContent=open?'✕':'☰'};
  nlk.querySelectorAll('a').forEach(a=>a.addEventListener('click',shut));}
-$$('.ad').forEach((b,i)=>b.onclick=()=>add(i));draw();
+$$('.ad').forEach((b,i)=>b.onclick=()=>add(i));loadCart();draw();
 // how + promo
 const S=[['Picked ripe','Sun-ripened fruit from 11 partner farms arrives every morning.','lime','#ffd6dc'],['Squeezed fresh','Real juice cold-pressed in minutes, never from concentrate.','orange','#fff0b3'],['Fizzed &amp; canned','Sparkling water, a little sugar and a lot of bubbles. Straight into the can.','berry','#d9d0ff']];
 $('#sts').innerHTML=S.map((s,i)=>`<div class="st"><div class="ic" style="background:${s[3]}"><span class="nm">${i+1}</span>${fr(s[2])}</div><div><h3>${s[0]}</h3><p>${s[1]}</p></div></div>`).join('');
 $('#pspl').innerHTML=ASSETS.splash.cherry?`<img src="${ASSETS.splash.cherry}" alt="" onerror="this.remove()">`:'';
 $('#pv').insertAdjacentHTML('afterbegin',can(F[0].c,'p1','Cherry Pop',1).replace(/<(svg|img)/,'<$1 style="left:18%;transform:rotate(-8deg)"')+can(F[1].c,'p2','Lime Zing',1).replace(/<(svg|img)/,'<$1 style="right:16%;transform:rotate(8deg)"'));
 function tick(){const d=new Date(),e=new Date(d);e.setHours(23,59,59,0);let s=Math.max(0,Math.floor((e-d)/1000));const p=v=>String(v).padStart(2,'0');$('#tm').innerHTML=[['HRS',s/3600|0],['MIN',s/60%60|0],['SEC',s%60]].map(a=>`<div><b>${p(a[1])}</b><span>${a[0]}</span></div>`).join('')}tick();setInterval(tick,1000);
+// footer signup — no backend, so it validates, remembers, and says so honestly
+(function(){const em=$('#em'),jb=$('#jb'),msg=$('#jmsg');if(!em||!jb||!msg)return;
+ const ok=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+ const done=v=>{em.value=v;em.disabled=true;jb.disabled=true;jb.textContent='Joined ✓';msg.className='jm ok';msg.textContent='You are on the list — birthday can incoming. (Demo: nothing is actually sent.)'};
+ try{const saved=localStorage.getItem('fizzly.mail');if(saved)done(saved)}catch(e){}
+ const go=()=>{const v=em.value.trim();
+  if(!ok.test(v)){msg.className='jm';msg.textContent='That email does not look right.';em.classList.add('shake');setTimeout(()=>em.classList.remove('shake'),420);em.focus();return}
+  try{localStorage.setItem('fizzly.mail',v)}catch(e){};done(v)};
+ jb.addEventListener('click',go);
+ em.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();go()}});
+})();
+// reading progress
+(function(){const prg=$('#prg');if(!prg)return;
+ const upd=()=>{const h=document.documentElement,max=h.scrollHeight-h.clientHeight;prg.style.width=(max>0?h.scrollTop/max*100:0)+'%'};
+ addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();})();
+
 // scroll reveals
 gsap.from('#d1 svg,#d2 svg',{scaleY:0,transformOrigin:'top',duration:1,ease:'elastic.out(1,.6)',scrollTrigger:{trigger:'#flav',start:'top 80%'}});
 gsap.from('.sec h2,.sec .pill,.sec>p,.ch',{y:50,opacity:0,stagger:.1,duration:.7,scrollTrigger:{trigger:'#flav',start:'top 60%'}});

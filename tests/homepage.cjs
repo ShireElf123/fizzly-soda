@@ -8,6 +8,7 @@ function run(width, reduced) {
   const timeline = new Proxy({}, { get: (_, k) => k === 'then' ? undefined : () => timeline });
   const dom = new JSDOM(html, { runScripts: 'dangerously', pretendToBeVisual: true, url: 'https://fizzly.test/', beforeParse(w) {
     w.onerror = message => errors.push(message);
+    w.HTMLCanvasElement.prototype.getContext = () => new Proxy({}, { get: () => () => {} });
     w.matchMedia = query => ({ matches: query.includes('reduced-motion') ? reduced : width <= 820, addEventListener() {} });
     // Intentionally omit GSAP in reduced mode to cover the CDN failure fallback.
     if (!reduced) {
@@ -17,6 +18,9 @@ function run(width, reduced) {
   }});
   const w = dom.window, d = w.document;
   assert.equal(d.querySelectorAll('.cd').length, 6);
+  assert(d.querySelector('#ld .l2').textContent.includes('Ready to'));
+  assert.equal(d.querySelector('#ld').style.display, reduced ? 'none' : 'grid');
+  if (!reduced) { d.querySelector('#motion-toggle').click(); assert.equal(d.querySelector('#motion-toggle').getAttribute('aria-pressed'), 'true'); d.querySelector('#motion-toggle').click(); assert.equal(d.querySelector('#motion-toggle').getAttribute('aria-pressed'), 'false'); }
   assert.equal(d.querySelectorAll('#dt [aria-pressed="true"]').length, 1);
   d.querySelectorAll('#dt button')[4].click();
   assert.equal(d.querySelectorAll('#dt button')[4].getAttribute('aria-pressed'), 'true');

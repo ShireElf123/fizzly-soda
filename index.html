@@ -21,6 +21,9 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}svg{di
 .btn{display:inline-flex;align-items:center;gap:10px;border-radius:99px;padding:15px 30px;font:800 17px Nunito;background:var(--coral);color:var(--ink);box-shadow:0 6px 0 #b3303d;transition:transform .15s,box-shadow .15s;text-decoration:none}
 .btn:hover{transform:translateY(-3px);box-shadow:0 9px 0 #b3303d}.btn:active{transform:translateY(4px);box-shadow:0 2px 0 #b3303d}
 .btn.o{background:none;border:2.5px solid #fff;box-shadow:none}.btn.y{background:var(--sun);color:var(--ink);box-shadow:0 5px 0 #c99200}
+#ld{position:fixed;inset:0;z-index:99;background:var(--ink);display:grid;place-items:center;text-align:center;overflow:hidden;pointer-events:none}
+#ld b{font:400 clamp(70px,22vw,170px) 'Titan One';color:#fff;display:flex}#ld i{font-style:normal;display:inline-block}
+#ld .l2{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);padding:0 16px;opacity:0;color:var(--ink);font:400 clamp(38px,12vw,110px)/1 'Titan One'}
 nav{position:fixed;z-index:50;top:max(12px,env(safe-area-inset-top,0px));left:14px;right:14px;display:flex;justify-content:space-between;align-items:center;padding:8px 10px 8px 14px;border-radius:99px;background:#06283acc;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .logo{display:flex;align-items:center;gap:9px;font:400 28px 'Titan One';color:#fff;text-decoration:none}.logo i{width:34px;height:34px;border-radius:50%;background:var(--lime);display:grid;place-items:center}
 .mnu{display:none}
@@ -30,12 +33,13 @@ nav .r{display:flex;gap:10px;align-items:center}.bag{position:relative;width:44p
 .hero{position:relative;min-height:100svh;overflow:hidden;background:radial-gradient(ellipse at 50% 70%,#0e6a72 0,var(--ink) 65%);padding:100px 5vw 40px;display:flex;flex-direction:column;align-items:center}
 .hero h1{font-size:clamp(54px,11.5vw,190px);text-align:center;position:relative;z-index:4;text-shadow:0 6px 0 #0004}.hero h1 .w{display:inline-block}.hero h1 .lm{color:var(--lime)}
 .stage{position:relative;width:min(92vw,720px);height:min(62vh,600px);margin-top:-2vw;z-index:2}
-.bl{position:absolute;border-radius:60% 40% 55% 45%/50% 60% 40% 50%;transition:background .6s}
+.bl{position:absolute;border-radius:60% 40% 55% 45%/50% 60% 40% 50%;animation:mo 9s ease-in-out infinite;transition:background .6s}
 @keyframes mo{0%,100%{border-radius:60% 40% 55% 45%/50% 60% 40% 50%}50%{border-radius:40% 60% 45% 55%/60% 40% 60% 40%}}
 #b1{left:12%;right:12%;top:2%;bottom:6%;background:var(--aqua);opacity:.9}#b2{left:4%;width:34%;bottom:2%;height:36%;background:var(--sun);animation-delay:-3s}#b3{right:6%;width:28%;bottom:8%;height:30%;background:var(--coral);animation-delay:-6s}
 #hc{position:absolute;left:50%;bottom:0;height:100%;transform:translateX(-50%);z-index:3;filter:drop-shadow(0 30px 24px #0007)}#hc:focus-visible{outline:3px solid var(--lime);outline-offset:8px;border-radius:24px}#hc svg{height:100%;width:auto}
 .fr{position:absolute;z-index:4;pointer-events:none}.fr svg{width:100%;height:100%}
-.sp{position:absolute;z-index:5;color:var(--sun);font-size:26px;}@keyframes tw{50%{transform:scale(.4) rotate(40deg);opacity:.5}}
+.sp{position:absolute;z-index:5;color:var(--sun);font-size:26px;animation:tw 2.4s ease-in-out infinite}@keyframes tw{50%{transform:scale(.4) rotate(40deg);opacity:.5}}
+#bb{position:absolute;inset:0;z-index:1;pointer-events:none;width:100%;height:100%}
 .dots{display:flex;gap:10px;margin-top:14px;z-index:6;position:relative}.dots button{width:30px;height:30px;border-radius:50%;border:3px solid #fff;transition:transform .2s}.dots button.on{transform:scale(1.35);border-color:var(--lime)}
 .hl{position:absolute;left:5vw;bottom:44px;max-width:380px;z-index:6}.hl h3{font-size:30px;color:var(--sun);margin-bottom:8px}.hl p{opacity:.85;margin-bottom:16px}.hl .row{display:flex;gap:10px;flex-wrap:wrap}
 .hr{position:absolute;right:5vw;bottom:44px;z-index:6;display:grid;gap:10px;justify-items:end}
@@ -142,6 +146,10 @@ img.can{height:100%;width:auto;display:block}@keyframes fad{from{opacity:0}to{op
 @media(max-width:350px){.build-list{grid-template-columns:1fr}}
 
 
+/* Optional control for the hero's continuous decorative animation. */
+.motion-toggle{position:relative;z-index:6;margin-top:10px;padding:8px 14px;min-height:44px;border:1px solid #ffffff99;border-radius:99px;color:#fff;background:#06283abf;font-size:13px;font-weight:800}
+.hero.motion-paused .bl,.hero.motion-paused .sp{animation-play-state:paused}
+@media(prefers-reduced-motion:reduce){.motion-toggle{display:none}}
 /* Mobile accessibility and resilient layouts */
 .nojs{position:relative;z-index:120;background:#fff8e8;color:#06283a;padding:1rem;text-align:center}
 :focus-visible{outline:3px solid #ffbf00;outline-offset:3px;box-shadow:0 0 0 5px #06283a}
@@ -151,27 +159,23 @@ img.can{height:100%;width:auto;display:block}@keyframes fad{from{opacity:0}to{op
 @media(max-width:820px){
  nav{gap:8px}nav .r{gap:6px;flex-shrink:0}nav .nav-order{display:none}
  .logo{font-size:clamp(22px,7vw,28px);min-width:0}.logo i{flex:none}
- .hero{padding:88px 5vw 50px;min-height:0}
- .hero h1{order:0;font-size:clamp(42px,10vw,70px)}
- .hl{order:1;margin:14px 0 8px;width:100%;text-align:center}.hl h3{font-size:22px}.hl p{margin-bottom:10px}.hl .row{justify-content:center}.hl .row .btn{padding:11px 18px;font-size:15px}
- .stage{order:2;width:min(90vw,500px);height:clamp(220px,36svh,320px);margin:8px 0 0}
- .dots{order:3;gap:0;justify-content:center;flex-wrap:wrap;max-width:100%;margin-top:10px}.dots button{width:44px;height:44px;flex:none;border:6px solid #fff}.dots button.on{transform:scale(1.08)}
- .hr{order:4;width:100%;grid-template-columns:repeat(2,minmax(0,1fr));justify-items:stretch;margin-top:20px}.gl{padding:10px;font-size:13px}
+ .dots{gap:0;justify-content:center;flex-wrap:wrap;max-width:100%}.dots button{width:44px;height:44px;flex:none;border:6px solid #fff}.dots button.on{transform:scale(1.08)}
  .build-list{grid-template-columns:1fr}.build-item{padding:10px 12px}.build-name{font-size:14px}.build-qty button{width:44px;height:44px}
  .cd .ad{width:44px;height:44px}.cd .pr{gap:6px}
 }
-@media(max-width:380px){.logo{font-size:22px}.logo i{width:30px;height:30px}.hero h1{font-size:clamp(38px,11vw,48px)}.hr{grid-template-columns:1fr}}
+@media(max-width:380px){.logo{font-size:22px}.logo i{width:30px;height:30px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
 
 </style></head><body>
 <div id="prg" aria-hidden="true"></div>
+<div id="ld" aria-hidden="true" style="display:none"></div>
 <noscript><p class="nojs">Fizzly needs JavaScript to display its flavours and demo cart. Please enable JavaScript to browse.</p></noscript>
 <a class="skip" href="#main">Skip to content</a><nav><a class="logo" href="#"><i id="lg"></i>fizzly</a><div class="lk" id="navlk"><a href="#flav">Shop flavours</a><a href="#how">How we fizz</a><a href="#deal">Deals</a><a href="#builder">Build a six-pack</a></div><div class="r"><button class="mnu" aria-label="Menu" aria-expanded="false" aria-controls="navlk">☰</button><button class="bag" aria-label="Cart" aria-haspopup="dialog"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><path d="M5 8h14l-1 12H6zM9 8a3 3 0 016 0"/></svg><span id="cn" aria-live="polite" aria-atomic="true">0</span></button><a class="btn y nav-order" style="padding:11px 22px;font-size:15px" href="#flav">Order now</a></div></nav>
 
-<header class="hero" id="hero">
+<header class="hero" id="hero"><canvas id="bb" aria-hidden="true"></canvas>
 <h1><span class="w">Get</span> <span class="w">your</span> <span class="w lm">fizz</span> <span class="w lm">on!</span></h1>
 <div class="stage" id="stg"><i class="bl" id="b1"></i><i class="bl" id="b2"></i><i class="bl" id="b3"></i><div class="hs" id="hs"></div><div id="hc" role="button" tabindex="0" aria-label="Pop the can"></div></div>
-<div class="dots" id="dt"></div>
+<div class="dots" id="dt"></div><button class="motion-toggle" id="motion-toggle" type="button" aria-pressed="false">Pause motion</button>
 <div class="hl"><h3>Bubbly happiness in every sip!</h3><p>Six bright flavours, ready for your perfect mix.</p><div class="row"><a class="btn" href="#flav">Order now</a><a class="btn o" href="#flav">Explore flavours</a></div></div>
 <div class="hr"><div class="gl"><span class="t" style="color:#174c24;font-size:20px">6</span><div>Flavours<small>Pick your favourites</small></div></div><div class="gl"><span class="t" style="color:#234dbb;font-size:20px">✦</span><div>Mix &amp; match<small>Build your own six-pack</small></div></div></div></header>
 <main id="main">
@@ -237,17 +241,36 @@ function canV(c,u,t){return `<svg viewBox="0 0 200 420"><defs><linearGradient id
 <path d="M24 112H176V372Q176 398 150 402H50Q24 398 24 372Z" fill="url(#g${u})"/><path d="M24 112H176V372Q176 398 150 402H50Q24 398 24 372Z" fill="url(#r${u})"/><rect x="40" y="118" width="9" height="250" rx="4.5" fill="#fff" opacity=".3"/><rect x="152" y="130" width="5" height="200" rx="2.5" fill="#fff" opacity=".2"/>${[[60,160],[140,330],[70,340],[132,150],[52,300],[150,250]].map(d=>`<circle cx="${d[0]}" cy="${d[1]}" r="${3+d[0]%3}" fill="#fff" opacity=".45"/>`).join('')}</svg>`}
 function drip(col,seed){let d='M0 0V26',x=0,s=seed;const r=()=>(s=(s*9301+49297)%233280)/233280;while(x<1200){const w=34+r()*44,l=18+r()*52;d+=`H${x+12}Q${x+12} ${26+l} ${x+12+w/2} ${26+l}Q${x+12+w} ${26+l} ${x+12+w} 26`;x+=w+26}return `<svg viewBox="0 0 1200 90" preserveAspectRatio="none" style="width:100%;height:100%"><path d="${d}H1200V0Z" fill="${col}"/></svg>`}
 $('#d1').innerHTML=drip('#06283a',7);$('#d2').innerHTML=drip('#06283a',3);
-// No blocking loader: the page is usable as soon as its script runs.
+// Display the intro only when animation is available; never block no-JS or reduced-motion visitors.
+const L=$('#ld');L.innerHTML='<b>'+[...'fizzly'].map(c=>`<i>${c}</i>`).join('')+'</b><div class="l2">Ready to<br>fizz it up?</div>';
+if(HAS_GSAP&&!REDUCE){L.style.display='grid';setTimeout(()=>{L.style.display='none'},6500)}
 $('#lg').innerHTML=fr('lime',0);
 // hero
 let cur=0;const hc=$('#hc'),B=['#3de0d2','#c8ff2e','#ffc933','#c9a8ff','#fff27a','#46dcf5'];
 function setHero(i,anim){cur=i;hc.innerHTML=can(F[i].c,'h',F[i].n);$('#b1').style.background=B[i];const sp=ASSETS.splash[F[i].f],hs=$('#hs');hs.innerHTML=sp?`<img src="${sp}" srcset="${sp.replace('.webp','-mobile.webp')} 960w, ${sp} 2400w" sizes="(max-width: 820px) 100vw, 1260px" alt="" onerror="this.remove()">`:'';hs.style.opacity='.85';if(HAS_GSAP&&!REDUCE)gsap.fromTo(hs,{opacity:0,scale:.82,y:30},{opacity:.85,scale:1,y:0,duration:.9,ease:'power3.out'});document.documentElement.style.setProperty('--acc',B[i]);$$('#dt button').forEach((b,k)=>{b.classList.toggle('on',k===i);b.setAttribute('aria-pressed',String(k===i))});if(anim&&!REDUCE)gsap.fromTo(hc,{y:-80,scaleY:1.15,rotate:-8},{y:0,scaleY:1,rotate:0,duration:.8,ease:'elastic.out(1,.55)'});place()}
 $('#dt').innerHTML=F.map((f,i)=>`<button aria-label="Show ${f.n}" aria-pressed="false" style="background:${f.c[0]}"></button>`).join('');$$('#dt button').forEach((b,i)=>b.onclick=()=>setHero(i,1));
-const FP=[[8,10,92],[78,6,104],[2,56,78],[84,50,96],[66,72,70],[20,76,86]];let fe=[];
-function place(){const s=$('#stg');s.querySelectorAll('.fr').forEach(e=>e.remove());const t=[F[cur].f,F[(cur+1)%6].f,F[(cur+2)%6].f,F[(cur+3)%6].f,F[cur].f,F[(cur+4)%6].f];fe=FP.map((p,i)=>{const e=document.createElement('div');e.className='fr';e.dataset.d=(.5+i%3*.4);Object.assign(e.style,{left:p[0]+'%',top:p[1]+'%',width:p[2]+'px',height:p[2]+'px',filter:i%3==2?'blur(3px)':'none'});e.innerHTML=fr(t[i],i+cur);s.appendChild(e);if(HAS_GSAP&&!REDUCE)gsap.fromTo(e,{scale:0,rotate:-90},{scale:1,rotate:i*40,duration:.7,delay:.1*i,ease:'back.out(2)'});return e})}
+const FP=[[8,10,92],[78,6,104],[2,56,78],[84,50,96],[66,72,70],[20,76,86]];let fe=[],fruitTweens=[],heroPaused=false,bubbleFrame=0,bubbleDraw=null;
+function place(){fruitTweens.forEach(t=>t.kill());fruitTweens=[];const s=$('#stg');s.querySelectorAll('.fr').forEach(e=>e.remove());const t=[F[cur].f,F[(cur+1)%6].f,F[(cur+2)%6].f,F[(cur+3)%6].f,F[cur].f,F[(cur+4)%6].f];fe=FP.map((p,i)=>{const e=document.createElement('div');e.className='fr';e.dataset.d=(.5+i%3*.4);Object.assign(e.style,{left:p[0]+'%',top:p[1]+'%',width:p[2]+'px',height:p[2]+'px',filter:i%3==2?'blur(3px)':'none'});e.innerHTML=fr(t[i],i+cur);s.appendChild(e);if(HAS_GSAP&&!REDUCE){gsap.fromTo(e,{scale:0,rotate:-90},{scale:1,rotate:i*40,duration:.7,delay:.1*i,ease:'back.out(2)'});const tween=gsap.to(e,{y:'+=18',duration:2.2+i*.3,yoyo:true,repeat:-1,ease:'sine.inOut'});fruitTweens.push(tween);if(heroPaused)tween.pause()}return e})}
 setHero(0);
 ['10% 8%','86% 20%','18% 54%'].forEach(p=>{const e=document.createElement('i');e.className='sp';e.textContent='✦';const [x,y]=p.split(' ');e.style.cssText=`left:${x};top:${y}`;$('#stg').appendChild(e)});
-// Decorative motion is static, keeping the page calm and inexpensive to render.
+function heroIn(){if(REDUCE)return;gsap.from('.hero h1 .w',{y:120,rotate:-12,opacity:0,stagger:.1,duration:.8,ease:'back.out(2)'});gsap.from('#hc',{y:-300,opacity:0,duration:1,ease:'bounce.out',delay:.2});gsap.from('.bl',{scale:0,stagger:.15,duration:.9,ease:'elastic.out(1,.6)'});gsap.from('.hl,.hr,.dots',{y:40,opacity:0,stagger:.12,duration:.7,delay:.6})}
+// Intro retains its original animation with a timeout in case the timeline is interrupted.
+if(HAS_GSAP&&!REDUCE){
+ const hideIntro=()=>{L.style.display='none'};
+ gsap.timeline({onComplete:hideIntro}).from('#ld i',{y:90,rotate:-30,opacity:0,stagger:.08,duration:.6,ease:'back.out(2.4)'}).to('#ld b',{scale:1.06,duration:.2,yoyo:true,repeat:1},'+=.15')
+ .to(L,{backgroundColor:'#c8ff2e',duration:.4},'+=.1').to('#ld b',{opacity:0,duration:.2},'<').to('#ld .l2',{opacity:1,scale:1,duration:.5,ease:'back.out(2)'},'<.1').to(L,{yPercent:-100,duration:.8,ease:'power3.inOut'},'+=.7').add(heroIn,'-=.35').set(L,{display:'none'});
+}
+if(HAS_GSAP&&!REDUCE){
+ $('#hero').addEventListener('mousemove',e=>{if(heroPaused)return;const x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;gsap.to('#hc',{x:x*24,y:y*10,rotate:x*4,rotationY:x*24,rotationX:-y*9,transformPerspective:900,duration:1.2,overwrite:'auto'});fe.forEach(f=>gsap.to(f,{x:-x*90*f.dataset.d,duration:1.4,overwrite:'auto'}))});
+ gsap.to('#hc',{yPercent:-6,ease:'none',scrollTrigger:{trigger:'#hero',scrub:true,start:'top top',end:'bottom top'}});
+}
+// Animated bubbles in the hero; stop the loop while paused or reduced motion is requested.
+if(!REDUCE){
+ const c=$('#bb'),x=c.getContext('2d');if(x){let W,H,b=[];const rs=()=>{W=c.width=c.offsetWidth;H=c.height=c.offsetHeight};rs();addEventListener('resize',rs);
+ for(let i=0;i<46;i++)b.push({x:Math.random()*W,y:Math.random()*H,r:2+Math.random()*9,s:.3+Math.random()*1.1,w:Math.random()*6});
+ bubbleDraw=function(){if(heroPaused)return;x.clearRect(0,0,W,H);b.forEach(o=>{o.y-=o.s;o.w+=.03;if(o.y<-20){o.y=H+20;o.x=Math.random()*W}const px=o.x+Math.sin(o.w)*10;x.beginPath();x.arc(px,o.y,o.r,0,7);x.strokeStyle='rgba(255,255,255,.35)';x.lineWidth=1.5;x.stroke();x.fillStyle='rgba(255,255,255,.08)';x.fill();x.beginPath();x.arc(px-o.r*.3,o.y-o.r*.3,o.r*.2,0,7);x.fillStyle='rgba(255,255,255,.6)';x.fill()});bubbleFrame=requestAnimationFrame(bubbleDraw)};bubbleDraw();}
+}
+$('#motion-toggle').onclick=function(){heroPaused=!heroPaused;$('#hero').classList.toggle('motion-paused',heroPaused);this.setAttribute('aria-pressed',String(heroPaused));this.textContent=heroPaused?'Resume motion':'Pause motion';fruitTweens.forEach(t=>heroPaused?t.pause():t.resume());if(heroPaused)cancelAnimationFrame(bubbleFrame);else if(bubbleDraw)bubbleDraw()};
 $('#mq').innerHTML='Get your fizz on ★ Six flavours ★ Mix and match ★ Zero boring ★ '.repeat(8);
 // cards, filter, cart
 let n=0;const cats=['All','Fruity','Citrus','Berry'];

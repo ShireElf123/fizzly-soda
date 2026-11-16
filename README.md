@@ -69,7 +69,7 @@ The "Pick your flavour" section is a grid, not a carousel: 3-up on desktop, 2-up
 ## Responsive and accessibility checks
 
 Mobile uses a compact navigation and an unpinned flavour explorer with labelled controls.
-Decorative continuous animation is disabled, and reduced motion suppresses transitions.
+Hero animations and the intro are enabled by default, with a pause control for the ambient motion. Reduced motion suppresses them.
 The hero and promo use smaller responsive splash images on phones.
 Run `node tests/homepage.cjs` for behavioural checks (jsdom does not perform visual layout).
 Real-device, keyboard, screen-reader and zoom checks remain necessary before launch.

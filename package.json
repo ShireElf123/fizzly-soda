@@ -1,5 +1,9 @@
 {
   "dependencies": {
     "jsdom": "^31.0.1"
+  },
+  "devDependencies": {
+    "gsap": "^3.12.5",
+    "playwright-core": "^1.65.1"
   }
 }

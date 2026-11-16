@@ -1,2 +1,5 @@
 assets-src/
 .DS_Store
+
+# Local dependency installs; existing tracked files remain tracked.
+node_modules/

@@ -73,3 +73,16 @@ Hero animations and the intro are enabled by default, with a pause control for t
 The hero and promo use smaller responsive splash images on phones.
 Run `node tests/homepage.cjs` for behavioural checks (jsdom does not perform visual layout).
 Real-device, keyboard, screen-reader and zoom checks remain necessary before launch.
+
+### Browser regression audit
+
+Install dependencies (`npm install`), install Chromium separately, and run:
+
+```sh
+CHROMIUM_PATH=/path/to/chromium node tests/browser-audit.cjs
+```
+
+The script serves the repository on a temporary local port and uses the pinned GSAP
+version from npm to avoid relying on the CDN. It checks responsive reflow, navigation,
+the intro, product images and cart interactions. See `docs/homepage-mobile-audit.md`
+for the latest findings and the testing that remains.

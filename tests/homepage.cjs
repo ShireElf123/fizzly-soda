@@ -39,16 +39,9 @@ function run(width, reduced) {
   d.querySelector('.bag').click();
   d.querySelector('#ci .q button[data-d="1"]').click();
   assert.equal(d.activeElement.getAttribute('data-d'), '1');
-  d.querySelector('#cob').click();
-  assert.equal(d.activeElement.name, 'name');
-  assert.equal(d.querySelector('#checkout-form').checkValidity(), false);
-  d.querySelector('#checkout-form button[type="button"]').click();
-  assert.equal(d.activeElement.id, 'cob');
+  assert(d.querySelector('#cob').textContent.includes('View cart'));
+  assert.equal(d.querySelector('#navlk a').getAttribute('href'), 'shop.html');
   d.querySelector('#xc').click();
-  for (let i = 0; i < 6; i++) w.changeMix(1, 1);
-  assert.equal(d.querySelector('#build-add').disabled, false);
-  d.querySelector('#build-add').click();
-  assert.equal(d.querySelector('#cn').textContent, '8');
   assert.deepEqual(errors, []);
   dom.window.close();
   console.log(`${width}px, reduced motion ${reduced}: interactions passed (no layout engine)`);

@@ -86,3 +86,15 @@ The script serves the repository on a temporary local port and uses the pinned G
 version from npm to avoid relying on the CDN. It checks responsive reflow, navigation,
 the intro, product images and cart interactions. See `docs/homepage-mobile-audit.md`
 for the latest findings and the testing that remains.
+
+### Multi-page storefront
+
+The shop, flavour details, cart and checkout are static demo pages sharing the homepage's `fizzly.cart` local-storage key. Checkout does not transmit information, take payment, or create an order; product information and delivery charges are illustrative. Run the storefront browser regression against a local static server:
+
+```sh
+python3 -m http.server 4185 --bind 0.0.0.0
+# In another terminal, after installing dependencies:
+CHROMIUM_PATH=/path/to/chromium node tests/storefront.cjs
+```
+
+Set `STORE_URL` to test a different base URL. The browser test covers mobile and desktop reflow, product selection, cart persistence, the six-pack builder, and demo checkout.

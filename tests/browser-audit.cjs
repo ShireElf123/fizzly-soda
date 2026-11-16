@@ -58,14 +58,14 @@ const server = http.createServer((req, res) => {
       assert(m.loaded && m.fits, `mobile explorer can ${i + 1}`);
     }
     await page.locator('.mnu').click(); assert.equal(await page.locator('.mnu').getAttribute('aria-expanded'), 'true');
-    await page.locator('#navlk a').first().click(); assert.equal(await page.locator('.mnu').getAttribute('aria-expanded'), 'false');
-    for (let i = 0; i < 6; i++) await page.locator('#build-list .build-item').first().locator('button').last().click();
-    await page.locator('#build-add').click(); assert.equal(await page.locator('#cn').innerText(), '6');
+    await page.locator('.mnu').click(); assert.equal(await page.locator('.mnu').getAttribute('aria-expanded'), 'false');
+    await page.locator('.ad').first().click(); assert.equal(await page.locator('#cn').innerText(), '1');
+    await page.locator('.bag').click();
     await page.locator('#ci .q button[data-d="1"]').first().click(); assert.equal(await page.evaluate(() => document.activeElement.getAttribute('data-d')), '1');
-    await page.locator('#cob').click(); assert.equal(await page.evaluate(() => document.activeElement.name), 'name');
-    assert.equal(await page.locator('#checkout-form').evaluate(e => e.checkValidity()), false);
-    await page.reload({ waitUntil: 'domcontentloaded' }); assert.equal(await page.locator('#cn').innerText(), '7');
-    console.log('Mobile flavour, menu, pack, cart, focus, validation and persistence passed.');
+    await page.locator('#cob').click(); await page.waitForURL('**/cart.html');
+    assert.equal(await page.locator('[data-cart-count]').innerText(), '2');
+    await page.reload({ waitUntil: 'domcontentloaded' }); assert.equal(await page.locator('[data-cart-count]').innerText(), '2');
+    console.log('Mobile flavour, menu, shared cart, focus and persistence passed.');
     // Check that performance suspension and the desktop pinned explorer still work
     // with motion enabled, without changing the original hero/intro animation.
     await page.emulateMedia({ reducedMotion: 'no-preference' });

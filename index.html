@@ -85,7 +85,21 @@ footer h3.t{font-size:30px;margin-bottom:16px}.jn{display:flex;background:#fff;b
 .li{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid #06283a18}.li .th{width:50px;height:74px;flex:none}.li .th svg,.li .th img{height:100%;width:auto}.li div.i{flex:1;font-size:15px;font-weight:800}
 .q{display:inline-flex;align-items:center;gap:12px;background:#fff;border-radius:99px;padding:4px 8px;margin-top:6px}.q button{width:28px;height:28px;border-radius:50%;background:#06283a12;font-size:18px}
 .bar{height:9px;background:#06283a18;border-radius:9px;overflow:hidden;margin:6px 0 14px}.bar i{display:block;height:100%;background:var(--coral);transition:width .5s}.tot{display:flex;justify-content:space-between;padding:3px 0}.tot.b{font:400 26px 'Titan One'}
-@media(max-width:820px){.ex{grid-template-columns:1fr;grid-template-rows:auto 1fr;padding-top:84px}#exc{height:44vh}}
+/* On phones the explorer flows with its content instead of clipping a pinned viewport. */
+.ex-hint{display:none}
+@media(max-width:820px){
+ .ex{height:auto;min-height:100svh;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto;align-content:start;align-items:start;gap:14px;padding:90px 6vw 32px;overflow:visible}
+ .ex .nm{font-size:clamp(38px,11vw,56px);line-height:1;margin:8px 0}
+ .exd p{font-size:16px;margin-bottom:10px}.exd span{font-size:13px;padding:4px 11px;margin:0 5px 4px 0}.exd b{font-size:28px;margin:6px 0}.exd .btn{padding:11px 23px;font-size:15px}
+ #exc{height:clamp(220px,38svh,330px);min-width:0;width:100%}
+ #exc>svg,#exc>img{max-width:100%;object-fit:contain}
+ .bgf{width:min(280px,75vw);height:min(280px,75vw)}
+ .exp{position:relative;left:auto;bottom:auto;gap:4px;align-items:center;flex-wrap:wrap}
+ .exp .dot,.exp .dot.on{width:40px;height:40px;flex:none}.exp .dot::after{top:17px}
+ .ex-hint{display:block;width:100%;font-size:13px;font-weight:800;opacity:.8;margin-bottom:2px}
+}
+@media(max-width:820px) and (max-height:500px){#exc{height:220px}}
+
 /* generated photo assets */
 img.can{height:100%;width:auto;display:block}@keyframes fad{from{opacity:0}to{opacity:1}}img.can,img.fruit{animation:fad .55s ease both}@media(prefers-reduced-motion:reduce){img.can,img.fruit{animation:none}}
 #hc img.can{height:100%;filter:drop-shadow(0 30px 24px #0007)}
@@ -337,10 +351,20 @@ $('#hc').onclick=popCan;
 $('#hc').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();popCan()}};
 // pinned flavour explorer: scroll to swap flavours, page colour follows
 const X=[['Sweet, bold and a little cheeky. Pure cherry joy.',['Sweet','Bold','Juicy'],'#5a0a1c'],['Sharp, zesty and wide awake.',['Zesty','Crisp','Tangy'],'#1d4d08'],['Sunshine in a can, with extra bubbles.',['Citrus','Bright','Bubbly'],'#7a3200'],['Deep, jammy and dangerously smooth.',['Rich','Jammy','Smooth'],'#2a0f5e'],['Lemonade’s louder, cooler cousin.',['Sour','Sunny','Fresh'],'#6b5200'],['Electric berry, ice-cold finish.',['Cool','Electric','Sweet'],'#06406b']];
-let ei=-1;$('#exp').innerHTML=F.map((f,i)=>`<button class="dot" data-i="${i}" aria-label="Show ${f.n}"></button>`).join('');$$('#exp .dot').forEach(b=>b.onclick=()=>exSet(+b.dataset.i));
+let ei=-1;$('#exp').innerHTML='<span class="ex-hint">Tap to explore the flavours</span>'+F.map((f,i)=>`<button class="dot" data-i="${i}" aria-label="Show ${f.n}" aria-pressed="false"></button>`).join('');$$('#exp .dot').forEach(b=>b.onclick=()=>exSet(+b.dataset.i));
 function exSet(i){if(i===ei)return;const first=ei<0;ei=i;const f=F[i];gsap.to('#ex',{backgroundColor:X[i][2],duration:.6});$('#ext').textContent='FLAVOUR 0'+(i+1)+' / 06';$('#exn').textContent=f.n;$('#exn').style.color=f.c[0];
 $('#exd').innerHTML=`<p>${X[i][0]}</p>`+X[i][1].map(s=>`<span>${s}</span>`).join('')+`<b>R${f.p}</b><button class="btn" onclick="add(${i})">Add to cart</button>`;
-const bp=ASSETS.backdrop[f.f],eb=$('#exbg');eb.style.backgroundImage=bp?`url('${bp}')`:'none';if(!first)gsap.fromTo(eb,{opacity:0},{opacity:.55,duration:.55});$('#exc').innerHTML=`<div class="bgf">${fr(f.f,0)}</div>`+can(f.c,'x',f.n,1);$$('#exp .dot').forEach((e,k)=>e.classList.toggle('on',k===i));
+const bp=ASSETS.backdrop[f.f],eb=$('#exbg');eb.style.backgroundImage=bp?`url('${bp}')`:'none';if(!first)gsap.fromTo(eb,{opacity:0},{opacity:.55,duration:.55});$('#exc').innerHTML=`<div class="bgf">${fr(f.f,0)}</div>`+can(f.c,'x',f.n,1);$$('#exp .dot').forEach((e,k)=>{e.classList.toggle('on',k===i);e.setAttribute('aria-pressed',String(k===i))});
 if(!first)gsap.fromTo('#exc',{rotationY:-200,scale:.7,transformPerspective:900},{rotationY:0,scale:1,duration:.9,ease:'back.out(1.5)'});gsap.fromTo('#exn,#exd,#ext',{y:40,opacity:0},{y:0,opacity:1,duration:.6,stagger:.06})}
-exSet(0);ScrollTrigger.create({trigger:'#ex',start:'top top',end:'+=320%',pin:true,onUpdate:s=>exSet(Math.min(5,Math.floor(s.progress*6)))});
+exSet(0);
+// Pin and scroll through flavours on desktop only. On smaller screens the section
+// remains in normal flow and the labelled flavour buttons control the selection.
+let explorerPin=null;
+function configureExplorer(){
+ const mobile=typeof matchMedia==='function'?matchMedia('(max-width: 820px)').matches:innerWidth<=820;
+ if(mobile){if(explorerPin){explorerPin.kill();explorerPin=null}}
+ else if(!explorerPin&&HAS_GSAP){explorerPin=ScrollTrigger.create({trigger:'#ex',start:'top top',end:'+=320%',pin:true,onUpdate:s=>exSet(Math.min(5,Math.floor(s.progress*6)))})}
+}
+configureExplorer();
+if(typeof matchMedia==='function'){const explorerMedia=matchMedia('(max-width: 820px)');if(explorerMedia.addEventListener)explorerMedia.addEventListener('change',configureExplorer);else if(explorerMedia.addListener)explorerMedia.addListener(configureExplorer)}else addEventListener('resize',configureExplorer);
 </script></body></html>

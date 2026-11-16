@@ -71,15 +71,26 @@ const server = http.createServer((req, res) => {
     await page.emulateMedia({ reducedMotion: 'no-preference' });
     await page.goto(url, { waitUntil: 'domcontentloaded' });
     await page.waitForFunction(() => getComputedStyle(document.querySelector('#ld')).display === 'none', null, { timeout: 8000 });
-    // Touch must not activate the mouse parallax and shift the hero can.
-    await page.waitForTimeout(1400);
-    const heroX = await page.locator('#hc').evaluate(e => gsap.getProperty(e, 'x'));
-    await page.locator('#hero').dispatchEvent('pointermove', { pointerType: 'touch', clientX: 389, clientY: 400 });
-    await page.waitForTimeout(1400);
-    assert.equal(await page.locator('#hc').evaluate(e => gsap.getProperty(e, 'x')), heroX, 'touch does not move hero can sideways');
-    await page.locator('#hero').dispatchEvent('pointermove', { pointerType: 'mouse', clientX: 389, clientY: 400 });
-    await page.waitForTimeout(1400);
-    assert.notEqual(await page.locator('#hc').evaluate(e => gsap.getProperty(e, 'x')), heroX, 'mouse parallax remains enabled');
+    // Check actual can alignment, not GSAP's internal transform, through interaction.
+    for (const width of [390, 1440]) {
+      await page.setViewportSize({width, height: 900});
+      await page.goto(url, { waitUntil: 'domcontentloaded' });
+      await page.waitForFunction(() => getComputedStyle(document.querySelector('#ld')).display === 'none', null, { timeout: 8000 });
+      await page.waitForTimeout(1500);
+      const checkCentered = async label => {
+        const delta = await page.evaluate(() => { const a=document.querySelector('#stg').getBoundingClientRect(), c=document.querySelector('#hc img').getBoundingClientRect(); return Math.abs((a.left+a.right-c.left-c.right)/2); });
+        assert(delta < 2, `${width}px ${label}: can shifted ${delta}px`);
+      };
+      await checkCentered('after intro');
+      await page.locator('#hero').dispatchEvent('pointermove', { pointerType: 'touch', clientX: width-1, clientY: 400 });
+      await page.locator('#hero').dispatchEvent('pointermove', { pointerType: 'mouse', clientX: 1, clientY: 400 });
+      await page.waitForTimeout(1400); await checkCentered('after touch and mouse');
+      await page.locator('#hc').click(); await page.waitForTimeout(1400); await checkCentered('after can click');
+      for(let i=0;i<6;i++){await page.locator('#dt button').nth(i).click(); await page.waitForTimeout(1100); await checkCentered(`after flavour ${i+1}`)}
+    }
+    await page.setViewportSize({width:390,height:844});
+    await page.goto(url, {waitUntil:'domcontentloaded'});
+    await page.waitForFunction(() => getComputedStyle(document.querySelector('#ld')).display === 'none', null, {timeout:8000});
     const motionSelectors = ['#mq', '.cd .bd', '#ex .bgf', '.pv .sc'];
     for (const selector of motionSelectors) assert.notEqual(await page.locator(selector).first().evaluate(e => getComputedStyle(e).animationName), 'none', `${selector} animation enabled`);
     await page.locator('#motion-toggle').click();

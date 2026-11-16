@@ -49,7 +49,7 @@ All client-side, no backend, and honest about it:
   completion screen. No details are transmitted, no order is placed, and no payment is taken.
   A real store needs a backend, inventory management, and a payment provider.
 - **Footer signup** validates the address, stores it under `fizzly.mail`, and switches to a
-  "Joined" state. Nothing is emailed; the copy says so.
+  "Saved" state. Nothing is emailed; the copy says so.
 - The drawer traps Tab focus, moves focus to the close button on open and restores it on close.
 
 ## Site chrome
@@ -65,3 +65,11 @@ All client-side, no backend, and honest about it:
 The "Pick your flavour" section is a grid, not a carousel: 3-up on desktop, 2-up under
 900px, and a compact list row on phones under 560px (see the media queries near the top of
 `index.html`). Tapping a card's can opens that flavour in the detail explorer.
+
+## Responsive and accessibility checks
+
+Mobile uses a compact navigation and an unpinned flavour explorer with labelled controls.
+Decorative continuous animation is disabled, and reduced motion suppresses transitions.
+The hero and promo use smaller responsive splash images on phones.
+Run `node tests/homepage.cjs` for behavioural checks (jsdom does not perform visual layout).
+Real-device, keyboard, screen-reader and zoom checks remain necessary before launch.

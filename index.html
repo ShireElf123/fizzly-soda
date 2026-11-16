@@ -262,7 +262,7 @@ if(HAS_GSAP&&!REDUCE){
  .to(L,{backgroundColor:'#c8ff2e',duration:.4},'+=.1').to('#ld b',{opacity:0,duration:.2},'<').to('#ld .l2',{opacity:1,scale:1,duration:.5,ease:'back.out(2)'},'<.1').to(L,{yPercent:-100,duration:.8,ease:'power3.inOut'},'+=.7').add(heroIn,'-=.35').set(L,{display:'none'});
 }
 if(HAS_GSAP&&!REDUCE){
- $('#hero').addEventListener('mousemove',e=>{if(heroPaused)return;const x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;gsap.to('#hc',{x:x*24,y:y*10,rotate:x*4,rotationY:x*24,rotationX:-y*9,transformPerspective:900,duration:1.2,overwrite:'auto'});fe.forEach(f=>gsap.to(f,{x:-x*90*f.dataset.d,duration:1.4,overwrite:'auto'}))});
+ $('#hero').addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||heroPaused)return;const x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;gsap.to('#hc',{x:x*24,y:y*10,rotate:x*4,rotationY:x*24,rotationX:-y*9,transformPerspective:900,duration:1.2,overwrite:'auto'});fe.forEach(f=>gsap.to(f,{x:-x*90*f.dataset.d,duration:1.4,overwrite:'auto'}))});
  gsap.to('#hc',{yPercent:-6,ease:'none',scrollTrigger:{trigger:'#hero',scrub:true,start:'top top',end:'bottom top'}});
 }
 // Animated bubbles in the hero; stop the loop while paused or reduced motion is requested.

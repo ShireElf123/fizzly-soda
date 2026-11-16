@@ -71,6 +71,15 @@ const server = http.createServer((req, res) => {
     await page.emulateMedia({ reducedMotion: 'no-preference' });
     await page.goto(url, { waitUntil: 'domcontentloaded' });
     await page.waitForFunction(() => getComputedStyle(document.querySelector('#ld')).display === 'none', null, { timeout: 8000 });
+    // Touch must not activate the mouse parallax and shift the hero can.
+    await page.waitForTimeout(1400);
+    const heroX = await page.locator('#hc').evaluate(e => gsap.getProperty(e, 'x'));
+    await page.locator('#hero').dispatchEvent('pointermove', { pointerType: 'touch', clientX: 389, clientY: 400 });
+    await page.waitForTimeout(1400);
+    assert.equal(await page.locator('#hc').evaluate(e => gsap.getProperty(e, 'x')), heroX, 'touch does not move hero can sideways');
+    await page.locator('#hero').dispatchEvent('pointermove', { pointerType: 'mouse', clientX: 389, clientY: 400 });
+    await page.waitForTimeout(1400);
+    assert.notEqual(await page.locator('#hc').evaluate(e => gsap.getProperty(e, 'x')), heroX, 'mouse parallax remains enabled');
     const motionSelectors = ['#mq', '.cd .bd', '#ex .bgf', '.pv .sc'];
     for (const selector of motionSelectors) assert.notEqual(await page.locator(selector).first().evaluate(e => getComputedStyle(e).animationName), 'none', `${selector} animation enabled`);
     await page.locator('#motion-toggle').click();
